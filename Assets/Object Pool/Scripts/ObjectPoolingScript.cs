@@ -10,7 +10,7 @@ public class ObjectPoolingScript : MonoBehaviour
      * 3. For the obj that is to be pooled, you need to have a script in it that has the interface "IpooledObj" and it must implement the "OnObjSpawned" function.
      * 4. Implement whatever stuff that needs to be run before the obj hides itself with SetActive(false).
      * 5. Make sure you remember to enqueue the obj again!!! e.g -> ObjectPoolingScript.current.poolDictionary[myName].Enqueue(gameObject); 
-    */
+     */
 
 
     public Dictionary<string, Queue<GameObject>> poolDictionary; //makes a dictionary pool with string as tag and "list" of Game OBj
@@ -41,7 +41,6 @@ public class ObjectPoolingScript : MonoBehaviour
 
     void Start()
     {
-
         poolDictionary = new Dictionary<string, Queue<GameObject>>(); //instantiates a new pool dictionary
         foreach (Pool pool in pools)                                  //runs through list of pools
         {

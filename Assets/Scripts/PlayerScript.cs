@@ -62,7 +62,15 @@ public class PlayerScript : MonoBehaviour
             {
                 _rb.velocity = new Vector2(0, _rb.velocity.y);
             }
-        } 
+        }
+        if(Input.GetButton("Down"))         //crouching and stuff
+        {
+
+        }
+        if(Input.GetButton("Up"))           //might not be needed
+        {
+
+        }
     }
     void JumpLogic()
     {
