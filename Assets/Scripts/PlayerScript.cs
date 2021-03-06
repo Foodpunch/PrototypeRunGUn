@@ -6,7 +6,7 @@ public class PlayerScript : MonoBehaviour
 {
 
     [SerializeField] LayerMask platformMask;
-    const float MOVESPEED = 5f;
+    float moveSpeed = 5f;
 
     float moveX;
     float jumpVelocity = 10f;
@@ -25,6 +25,14 @@ public class PlayerScript : MonoBehaviour
     float jumpPressTime;   
     [SerializeField]
     float coyoteTime = 0.2f;            //coyote time buffer
+
+    float movementDecayTime;
+
+    //Gun Mousemovement stuff
+    Vector3 mouseInput;
+    Vector3 mouseDir;
+    public GameObject gun;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,27 +48,34 @@ public class PlayerScript : MonoBehaviour
     {
         JumpLogic();
         MovementInput();
+        SetGunDirectionToMouse();
     }
     bool IsGrounded()   //uses boxcast to check if grounded
     {
         RaycastHit2D _raycast2D =  Physics2D.BoxCast(_col.bounds.center, _col.bounds.size, 0f, Vector2.down, .15f,platformMask);
         return (_raycast2D.collider != null);
     }
+
     void MovementInput()
     {
         if (Input.GetButton("Right"))
         {
-            _rb.velocity = new Vector2(+MOVESPEED, _rb.velocity.y);    
+             _rb.velocity = new Vector2(+moveSpeed, _rb.velocity.y);  
+
         }
         else
         {
             if(Input.GetButton("Left"))
             {
-                _rb.velocity = new Vector2(-MOVESPEED, _rb.velocity.y);
+                  _rb.velocity = new Vector2(-moveSpeed, _rb.velocity.y);
             }
             else
             {
-                _rb.velocity = new Vector2(0, _rb.velocity.y);
+                if (!BaseGun.isFiring && Time.time >= movementDecayTime)
+                {
+                    movementDecayTime = Time.time + (1/5f);
+                    _rb.velocity = new Vector2(0, _rb.velocity.y);
+                }
             }
         }
         if(Input.GetButton("Down"))         //crouching and stuff
@@ -112,11 +127,11 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetButton("Right"))
         {
             if (IsGrounded())
-                _rb.velocity = new Vector2(+MOVESPEED, _rb.velocity.y);
+                _rb.velocity = new Vector2(+moveSpeed, _rb.velocity.y);
             else
             {
-                _rb.velocity += new Vector2(+MOVESPEED * midAirControl * Time.deltaTime, 0);
-                _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -MOVESPEED, +MOVESPEED), _rb.velocity.y);
+                _rb.velocity += new Vector2(+moveSpeed * midAirControl * Time.deltaTime, 0);
+                _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -moveSpeed, +moveSpeed), _rb.velocity.y);
             }
         }
         else
@@ -124,11 +139,11 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetButton("Left"))
             {
                 if (IsGrounded())
-                    _rb.velocity = new Vector2(-MOVESPEED, _rb.velocity.y);
+                    _rb.velocity = new Vector2(-moveSpeed, _rb.velocity.y);
                 else
                 {
-                    _rb.velocity += new Vector2(-MOVESPEED * midAirControl * Time.deltaTime, 0);
-                    _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -MOVESPEED, +MOVESPEED), _rb.velocity.y);
+                    _rb.velocity += new Vector2(-moveSpeed * midAirControl * Time.deltaTime, 0);
+                    _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -moveSpeed, +moveSpeed), _rb.velocity.y);
                 }
             }
             else
@@ -139,5 +154,19 @@ public class PlayerScript : MonoBehaviour
     }
     #endregion
 
+    void SetGunDirectionToMouse()
+    {
+        mouseInput = Input.mousePosition;       //mouse pos in pixel
+        Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mouseInput);     //convert to world pos
+        mousePosWorld.z = 0;                                                        //make sure that z is 0 cos 2D
+        mouseDir = mousePosWorld - transform.position;                              //get the direction, pos to player
+        gun.transform.right = mouseDir;                                             //gun faces that direction. (maybe normalize?)
+    }
 
+    public void GunRecoil(float force)
+    {
+        Vector3 forceDir = -mouseDir;
+        forceDir.Normalize();
+        _rb.velocity += (Vector2)forceDir*force;
+    }
 }

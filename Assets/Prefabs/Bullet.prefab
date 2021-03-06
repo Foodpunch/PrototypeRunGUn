@@ -77,7 +77,7 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -94,6 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletData: {fileID: 11400000, guid: fe6d3038d58aaa44bbeae59f8b66c22e, type: 2}
+  bulletSparks: {fileID: 5660942414202970344, guid: ba7f53df4a2645344b654b113477b6e6,
+    type: 3}
 --- !u!1 &7282751486742160045
 GameObject:
   m_ObjectHideFlags: 0

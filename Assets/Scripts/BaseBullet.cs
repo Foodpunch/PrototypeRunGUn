@@ -19,13 +19,14 @@ public class BaseBullet : MonoBehaviour
     Rigidbody2D _rb;                //bullet's rigidbody
 
     //particle fx for the bullet?
-
+    public ParticleSystem bulletSparks;
 
    
     // Start is called before the first frame update
     protected virtual void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -55,8 +56,16 @@ public class BaseBullet : MonoBehaviour
     {
         if(collision != null)
         {
-            Despawn();
-        }
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                Vector3 normal = contact.normal;        //getting the normal for look rot
+                Vector3 point = contact.point;          //point at which contact happens\
+                Quaternion rot = Quaternion.FromToRotation(Vector3.right,normal); //so that particle looks at the opposite direction
+                ParticleSystem sparksClone = Instantiate(bulletSparks, point, rot);
+                Despawn();
+                break;
+            }
+        }   
     }
 
     protected virtual void Despawn()
