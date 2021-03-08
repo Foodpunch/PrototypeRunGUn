@@ -94,8 +94,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletData: {fileID: 11400000, guid: fe6d3038d58aaa44bbeae59f8b66c22e, type: 2}
+  bulletEffects: {fileID: 11400000, guid: 9060edb6a59fcbc4bb04e0a4fd0353c1, type: 2}
   bulletSparks: {fileID: 5660942414202970344, guid: ba7f53df4a2645344b654b113477b6e6,
     type: 3}
+  dustFX: {fileID: 574301091784274921, guid: c1fc7207d20e68a4ba400d3da513db4a, type: 3}
 --- !u!1 &7282751486742160045
 GameObject:
   m_ObjectHideFlags: 0

@@ -71,10 +71,10 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                if (!BaseGun.isFiring && Time.time >= movementDecayTime)
+                if (!BaseGun.isFiring && Time.time >= movementDecayTime)        //if player is firing, allow them to be affected by recoil for a while
                 {
-                    movementDecayTime = Time.time + (1/5f);
-                    _rb.velocity = new Vector2(0, _rb.velocity.y);
+                    movementDecayTime = Time.time + (1/5f);                     //arbitrary value, maybe same as firerate?
+                    _rb.velocity = new Vector2(0, _rb.velocity.y);              //if not firing or pressing keys, bring player to a stop
                 }
             }
         }
@@ -163,7 +163,7 @@ public class PlayerScript : MonoBehaviour
         gun.transform.right = mouseDir;                                             //gun faces that direction. (maybe normalize?)
     }
 
-    public void GunRecoil(float force)
+    public void GunRecoil(float force)          //adds a force to push the player back
     {
         Vector3 forceDir = -mouseDir;
         forceDir.Normalize();

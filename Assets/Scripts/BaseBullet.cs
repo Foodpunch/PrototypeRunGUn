@@ -19,8 +19,10 @@ public class BaseBullet : MonoBehaviour
     Rigidbody2D _rb;                //bullet's rigidbody
 
     //particle fx for the bullet?
-    public ParticleSystem bulletSparks;
 
+
+    public ParticleSystem bulletSparks;
+    public GameObject dustFX;
    
     // Start is called before the first frame update
     protected virtual void Start()
@@ -58,10 +60,15 @@ public class BaseBullet : MonoBehaviour
         {
             foreach (ContactPoint2D contact in collision.contacts)
             {
-                Vector3 normal = contact.normal;        //getting the normal for look rot
-                Vector3 point = contact.point;          //point at which contact happens\
-                Quaternion rot = Quaternion.FromToRotation(Vector3.right,normal); //so that particle looks at the opposite direction
-                ParticleSystem sparksClone = Instantiate(bulletSparks, point, rot);
+                // Vector3 normal = contact.normal;        //getting the normal for look rot
+                // Vector3 point = contact.point;          //point at which contact happens
+                // Quaternion rot = Quaternion.FromToRotation(Vector3.right,normal); //so that particle looks at the opposite direction
+                // ParticleSystem sparksClone = Instantiate(bulletSparks, point, rot);
+                // Quaternion rot2 = Quaternion.FromToRotation(Vector3.up, normal);
+                // GameObject dustClone = Instantiate(dustFX, point, rot2);
+
+                SpawnBulletEffects(contact);
+
                 Despawn();
                 break;
             }
@@ -74,7 +81,11 @@ public class BaseBullet : MonoBehaviour
         _rb.Sleep();
         gameObject.SetActive(false);
     }
-    
+    protected virtual void SpawnBulletEffects(ContactPoint2D contact)
+    {
+        GameManager.instance.BulletEffectsData.SpawnAllFX(contact);
+      //  bulletEffects.SpawnAllFX(contact);
+    }
     
 }
 [CreateAssetMenu(fileName = "New Bullet", menuName = "Bullet")]
