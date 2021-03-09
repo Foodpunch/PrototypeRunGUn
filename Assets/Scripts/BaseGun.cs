@@ -5,28 +5,27 @@ using UnityEngine;
 public class BaseGun : MonoBehaviour
 {
     public static bool isFiring;
-    protected float fireRate =5f;          //rate at which gun fires; number of shots persecond
-    public bool bAutofire = true;           //true = automatic; false = semi-auto
+    protected float fireRate =20f;          //rate at which gun fires; number of shots persecond
     protected float damage;            //damage the bullet does
     protected float projectileSpeed = 25f;        //force at which bullet flies out at
-    protected float recoil;             //change to curve in the future?
+    protected float recoil =10f;             //change to curve in the future?
 
+    protected float shootBuffer = 0.2f;     //buffered time for shooting
+    float shootDuration;                    //=guntime + buffer time
     protected float gunTime;            //potentially anim curve related stuff
-    [SerializeField]
-    AnimationCurve testCurve;
 
     //change to take gun data scriptable obj in the future
 
-    public BaseBullet bullet;       //Bullet that the gun uses
-    
-    
+    public BaseBullet bullet;       //Bullet that the gun uses    
 
     float nextTimeToFire;           
     protected Vector3 shootDirection = Vector3.right;     //default shoot direction faces right
-    Vector3 lastShootPos = Vector3.zero;                       //last direction gun was facing
+   
     protected Quaternion gunRotation;                             //rotation for gun direction
 
     public PlayerScript player;
+
+    //Vector3 lastShootPos = Vector3.zero;                       //last direction gun was facing
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -36,64 +35,84 @@ public class BaseGun : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        //SetShootDirection();
-        //if (bAutofire)
-        //{
-        //    AutoFire();
-        //}
-        //else SemiAuto();
-        //isFiring = false;
-        AutoFire();
+       BufferedFiring();
     }
-
-
-    protected virtual void AutoFire()
+    protected virtual void BufferedFiring()
     {
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
-        {
+        if(Input.GetButton("Fire1"))
+        {      
+            shootDuration = gunTime + shootBuffer;
             isFiring = true;
-            gunTime += Time.deltaTime;
-            SpawnBullet();
-            nextTimeToFire = Time.time + (1f / fireRate);
         }
-        else isFiring = false;
-
-        gunTime = 0f;       //reset gunTime;
-    }
-    protected virtual void SemiAuto()
-    {
-        if(Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
+        if(isFiring)
         {
-            isFiring = true;
             gunTime += Time.deltaTime;
-            SpawnBullet();
-            nextTimeToFire = Time.time + (1f / fireRate);
-        }
+            if (Time.time >= nextTimeToFire)
+            {
+                SpawnBullet();
+                nextTimeToFire = Time.time + (1f / fireRate);
+            }
 
+        }
+        if (!Input.GetButton("Fire1") && gunTime >= shootDuration)
+        {
+            isFiring = false;
+            gunTime = 0;
+        }
     }
+
     protected virtual void SpawnBullet()
     {
         BaseBullet bulletClone = Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.GetComponent<BaseBullet>().SetValue(damage, projectileSpeed);
         player = player.GetComponent<PlayerScript>();
-        player.GunRecoil(7f);
     }
 
 
+    #region unusedcode
 
-    void SetShootDirection()            //shoot direction based off key input/move dir
+    //void SetShootDirection()            //shoot direction based off key input/move dir
+    //{
+    //    float x = Input.GetAxisRaw("Horizontal");
+    //    float y = Input.GetAxisRaw("Vertical"); ;
+    //    shootDirection = (y < 0) ? new Vector2(0, y) : new Vector2(x, y);   //disables diagonal shooting downwards
+    //    if (lastShootPos != shootDirection && shootDirection != Vector3.zero)
+    //    {
+    //        lastShootPos = shootDirection;
+    //        float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+    //        gunRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+    //        transform.rotation = gunRotation;
+    //    }       
+    //}
+    void SemiAuto()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical"); ;
-        shootDirection = (y < 0) ? new Vector2(0, y) : new Vector2(x, y);   //disables diagonal shooting downwards
-        if (lastShootPos != shootDirection && shootDirection != Vector3.zero)
+        if (Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
         {
-            lastShootPos = shootDirection;
-            float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
-            gunRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            transform.rotation = gunRotation;
-        }       
+            isFiring = true;
+            gunTime += Time.deltaTime;
+            SpawnBullet();
+            nextTimeToFire = Time.time + (1f / fireRate);
+        }
     }
-    
+    protected virtual void AutoFire()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            gunTime += Time.deltaTime;
+            isFiring = true;
+            if (Time.time >= nextTimeToFire)
+            {
+                SpawnBullet();
+                nextTimeToFire = Time.time + (1f / fireRate);
+            }
+        }
+        else
+        {
+            gunTime = 0;
+            isFiring = false;
+        }
+    }
+    #endregion
+
 }

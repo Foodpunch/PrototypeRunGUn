@@ -16,7 +16,6 @@ public class BaseShotgun : BaseGun
             Quaternion randomArc = Quaternion.Euler(0, 0, spreadRange);
             BaseBullet bulletClone = Instantiate(bullet, transform.position, transform.rotation*randomArc);
             bulletClone.GetComponent<BaseBullet>().SetValue(damage / pelletCount, projectileSpeed);
-            player.GunRecoil(5f);
         }
     }
 

@@ -47,7 +47,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.18, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -58,7 +58,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.2}
+  m_Size: {x: 0.4, y: 0.2}
   m_EdgeRadius: 0
 --- !u!50 &8681516072112250563
 Rigidbody2D:
@@ -94,7 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletData: {fileID: 11400000, guid: fe6d3038d58aaa44bbeae59f8b66c22e, type: 2}
-  bulletEffects: {fileID: 11400000, guid: 9060edb6a59fcbc4bb04e0a4fd0353c1, type: 2}
   bulletSparks: {fileID: 5660942414202970344, guid: ba7f53df4a2645344b654b113477b6e6,
     type: 3}
   dustFX: {fileID: 574301091784274921, guid: c1fc7207d20e68a4ba400d3da513db4a, type: 3}

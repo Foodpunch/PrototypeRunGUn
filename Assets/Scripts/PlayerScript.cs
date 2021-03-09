@@ -8,9 +8,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] LayerMask platformMask;
     float moveSpeed = 5f;
 
-    float moveX;
     float jumpVelocity = 10f;
-    Vector2 moveDir;
     Rigidbody2D _rb;
     BoxCollider2D _col;
 
@@ -19,21 +17,21 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     float groundTime;                    //times how long player has stayed on ground
 
-    //[Range(0, 1)]
-    //float jumpLimit = 0.5f;             //makes it so that holding jump gets you higher
+    public float hoverTime;             //time for how long player has hovered 
+
+  
     [SerializeField]
     float jumpPressTime;   
     [SerializeField]
     float coyoteTime = 0.2f;            //coyote time buffer
-
-    float movementDecayTime;
 
     //Gun Mousemovement stuff
     Vector3 mouseInput;
     Vector3 mouseDir;
     public GameObject gun;
 
-    // Start is called before the first frame update
+    //[Range(0, 1)]
+    //float jumpLimit = 0.5f;             //makes it so that holding jump gets you higher
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -43,7 +41,7 @@ public class PlayerScript : MonoBehaviour
     {
         
     }
-    // Update is called once per frame
+
     void Update()
     {
         JumpLogic();
@@ -71,11 +69,7 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                if (!BaseGun.isFiring && Time.time >= movementDecayTime)        //if player is firing, allow them to be affected by recoil for a while
-                {
-                    movementDecayTime = Time.time + (1/5f);                     //arbitrary value, maybe same as firerate?
-                    _rb.velocity = new Vector2(0, _rb.velocity.y);              //if not firing or pressing keys, bring player to a stop
-                }
+                _rb.velocity = new Vector2(0, _rb.velocity.y);
             }
         }
         if(Input.GetButton("Down"))         //crouching and stuff
@@ -86,6 +80,11 @@ public class PlayerScript : MonoBehaviour
         {
 
         }
+        if (!IsGrounded())
+        {
+            hoverTime += Time.deltaTime;
+        }
+        else hoverTime = 0;
     }
     void JumpLogic()
     {
@@ -168,5 +167,18 @@ public class PlayerScript : MonoBehaviour
         Vector3 forceDir = -mouseDir;
         forceDir.Normalize();
         _rb.velocity += (Vector2)forceDir*force;
+    }
+
+    public void GunRecoilVert(float force)
+    {
+        if (force <= 0) force = 0;
+        Vector3 forceDir = -mouseDir;
+        forceDir.Normalize();
+        if (forceDir.y > 0f)
+            _rb.velocity = new Vector2(0, forceDir.y * force);
+        //else _rb.velocity = _rb.velocity;
+       // float y = Mathf.Clamp((forceDir.y * force), 0, jumpVelocity);
+       // _rb.velocity = new Vector2(0, y);
+
     }
 }
