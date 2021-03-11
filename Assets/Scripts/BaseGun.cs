@@ -23,13 +23,17 @@ public class BaseGun : MonoBehaviour
    
     protected Quaternion gunRotation;                             //rotation for gun direction
 
-    public PlayerScript player;
+    protected PlayerScript player;
 
     //Vector3 lastShootPos = Vector3.zero;                       //last direction gun was facing
     // Start is called before the first frame update
+    protected virtual void Awake()
+    {
+        
+    }
     protected virtual void Start()
     {
-       
+        player = PlayerScript.instance.GetComponent<PlayerScript>();
     }
 
     // Update is called once per frame
@@ -65,7 +69,6 @@ public class BaseGun : MonoBehaviour
     {
         BaseBullet bulletClone = Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.GetComponent<BaseBullet>().SetValue(damage, projectileSpeed);
-        player = player.GetComponent<PlayerScript>();
     }
 
 

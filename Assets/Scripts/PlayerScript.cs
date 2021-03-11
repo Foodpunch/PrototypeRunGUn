@@ -30,8 +30,14 @@ public class PlayerScript : MonoBehaviour
     Vector3 mouseDir;
     public GameObject gun;
 
+    public static PlayerScript instance;
+
     //[Range(0, 1)]
     //float jumpLimit = 0.5f;             //makes it so that holding jump gets you higher
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
