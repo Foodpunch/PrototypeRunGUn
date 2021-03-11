@@ -98,7 +98,7 @@ public class CameraManager : MonoBehaviour
 
             transform.rotation = originRot * Quaternion.Euler(new Vector3(0f, 0f, angle));
             transform.position = originPos + new Vector3(offsetX, offsetY, 0f);
-            yield  return new WaitForSecondsRealtime(Time.deltaTime);
+            yield  return new WaitForSeconds(Time.deltaTime);
         }       
     }
     float FakeNoise(float time)
