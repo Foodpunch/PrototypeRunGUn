@@ -378,8 +378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trauma: 0
-  maxAngle: 90
-  maxOffset: 100
+  maxAngle: 35
+  maxOffset: 25
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
