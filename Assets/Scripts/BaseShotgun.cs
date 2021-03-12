@@ -6,7 +6,11 @@ public class BaseShotgun : BaseGun
 {
     protected int pelletCount = 3; //number of bullets per shot
     protected float spreadAngle = 25f; //angle of shotgun shot
-
+    protected override void Start()
+    {
+        base.Start();
+        fireRate = 2f;
+    }
 
     protected override void SpawnBullet()
     {
@@ -16,6 +20,7 @@ public class BaseShotgun : BaseGun
             Quaternion randomArc = Quaternion.Euler(0, 0, spreadRange);
             BaseBullet bulletClone = Instantiate(bullet, transform.position, transform.rotation*randomArc);
             bulletClone.GetComponent<BaseBullet>().SetValue(damage / pelletCount, projectileSpeed);
+            player.GunRecoilVert(recoil - (player.hoverTime * fireRate));
         }
     }
 

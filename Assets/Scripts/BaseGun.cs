@@ -15,7 +15,7 @@ public class BaseGun : MonoBehaviour
     protected float gunTime;            //potentially anim curve related stuff
 
     //change to take gun data scriptable obj in the future
-
+    //BulletDataScrObj bulletData;
     public BaseBullet bullet;       //Bullet that the gun uses    
 
     float nextTimeToFire;           
@@ -44,15 +44,22 @@ public class BaseGun : MonoBehaviour
     protected virtual void BufferedFiring()
     {
         if(Input.GetButton("Fire1"))
-        {      
+        {
+        
             shootDuration = gunTime + shootBuffer;
             isFiring = true;
         }
+        if (Input.GetMouseButton(1))
+        {
+            Time.timeScale = 0.1f;
+        }
+        else Time.timeScale = 1f;
         if(isFiring)
         {
             gunTime += Time.deltaTime;
             if (Time.time >= nextTimeToFire)
             {
+             //   CameraManager.instance.Shake(0.3f);
                 SpawnBullet();
                 nextTimeToFire = Time.time + (1f / fireRate);
             }
@@ -69,6 +76,8 @@ public class BaseGun : MonoBehaviour
     {
         BaseBullet bulletClone = Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.GetComponent<BaseBullet>().SetValue(damage, projectileSpeed);
+
+        
     }
 
 

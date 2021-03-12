@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1102b8bcbf1539a4f9c8435bc02916e8, type: 3}
+  m_Name: GunDataList
+  m_EditorClassIdentifier: 
+  gunDataList:
+  - name: pistol
+    firerate: 1
+    damage: 5
+    projectileSpeed: 25
+    recoil: 0
+    GunType: 0
+    bullet: {fileID: 0}
+  - name: shotgun
+    firerate: 3
+    damage: 5
+    projectileSpeed: 25
+    recoil: 10
+    GunType: 1
+    bullet: {fileID: 0}
+  - name: machineGun
+    firerate: 20
+    damage: 5
+    projectileSpeed: 25
+    recoil: 10
+    GunType: 2
+    bullet: {fileID: 0}
+  - name: sniper
+    firerate: 0.8
+    damage: 15
+    projectileSpeed: 35
+    recoil: 0
+    GunType: 0
+    bullet: {fileID: 0}

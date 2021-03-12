@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BaseBullet : MonoBehaviour
 {
-    public BulletData bulletData;
+   // public BulletDataScrObj bulletData;
 
     float bulletDamage;
     float bulletSpeed;
@@ -23,6 +23,7 @@ public class BaseBullet : MonoBehaviour
 
     public ParticleSystem bulletSparks;
     public GameObject dustFX;
+    
    
     // Start is called before the first frame update
     protected virtual void Start()
@@ -87,16 +88,4 @@ public class BaseBullet : MonoBehaviour
       //  bulletEffects.SpawnAllFX(contact);
     }
     
-}
-[CreateAssetMenu(fileName = "New Bullet", menuName = "Bullet")]
-public class BulletData : ScriptableObject
-{
-    public new string name;
-    public Sprite sprite;
-    public float damage;
-    public float speed;
-    public float time;
-
-    public bool gravityInfluence = false;
-
 }

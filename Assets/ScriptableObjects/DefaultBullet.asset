@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Default
-  m_EditorClassIdentifier: Assembly-CSharp::BulletData
-  name: Basic bullet
-  sprite: {fileID: -3102408814124167737, guid: 7dc21e7994d068e4298ad3cbd3d7f542, type: 3}
-  damage: 3
-  speed: 5
-  time: 5
+  m_Script: {fileID: 11500000, guid: 8ca15274aa861674fbb7437dc281f24d, type: 3}
+  m_Name: DefaultBullet
+  m_EditorClassIdentifier: 
+  name: 
+  sprite: {fileID: 0}
+  damage: 0
+  speed: 0
+  timeToDisappear: 0
+  airTime: 0
+  rigidbody: {fileID: 0}
+  shell: {fileID: 0}
   gravityInfluence: 0
