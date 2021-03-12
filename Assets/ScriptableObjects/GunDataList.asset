@@ -19,7 +19,7 @@ MonoBehaviour:
     projectileSpeed: 25
     recoil: 0
     GunType: 0
-    bullet: {fileID: 0}
+    bullet: {fileID: 11400000, guid: 1904d3748ea5f2b4a9a44accbbb762ed, type: 2}
   - name: shotgun
     firerate: 3
     damage: 5
