@@ -162,7 +162,7 @@ public class PlayerScript : MonoBehaviour
     void SetGunDirectionToMouse()
     {
         mouseInput = Input.mousePosition;       //mouse pos in pixel
-        Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mouseInput);     //convert to world pos
+        Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mouseInput);         //convert to world pos
         mousePosWorld.z = 0;                                                        //make sure that z is 0 cos 2D
         mouseDir = mousePosWorld - transform.position;                              //get the direction, pos to player
         gun.transform.right = mouseDir;                                             //gun faces that direction. (maybe normalize?)
@@ -182,9 +182,6 @@ public class PlayerScript : MonoBehaviour
         forceDir.Normalize();
         if (forceDir.y > 0f)
             _rb.velocity = new Vector2(0, forceDir.y * force);
-        //else _rb.velocity = _rb.velocity;
-       // float y = Mathf.Clamp((forceDir.y * force), 0, jumpVelocity);
-       // _rb.velocity = new Vector2(0, y);
 
     }
 }

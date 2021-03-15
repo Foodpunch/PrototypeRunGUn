@@ -11,5 +11,27 @@ public class BulletDataList : ScriptableObject
 
     public List<BulletData> bulletDataList;
 
+    public BulletData GetByName(string name)
+    {
+        for(int i = 0; i< bulletDataList.Count; i++)
+        {
+            if(name == bulletDataList[i].name)
+            {
+                return bulletDataList[i];
+            }
+        }
+        throw new System.Exception("No such bullet name exists!");
+    }
    
+    public BulletData GetByType(BulletData bullet)
+    {
+        for (int i = 0; i < bulletDataList.Count; i++)
+        {
+            if (bullet.Equals(bulletDataList[i]))
+            {
+                return bulletDataList[i];
+            }
+        }
+        throw new System.Exception("No such bullet type exists!");
+    }
 }

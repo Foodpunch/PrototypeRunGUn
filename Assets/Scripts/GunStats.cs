@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class GunData
+[CreateAssetMenu]
+public class GunStats :ScriptableObject
 {
-    public string name;
+    public new string name;
     public float firerate;
     public float damage;
     public float projectileSpeed = 25f;
@@ -19,6 +19,4 @@ public class GunData
     }
     public GunFiringType GunType = GunFiringType.DEFAULT;
     public BulletData bullet;
-
-
 }

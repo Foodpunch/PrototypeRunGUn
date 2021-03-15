@@ -7,10 +7,10 @@ public class BulletData : ScriptableObject
 {
     public new string name;
     public Sprite sprite;
-     float damage;
-     float speed;
+    public float damage;
+    public float speed;
     public float timeToDisappear;
-     float airTime;
+    public float airTime;
     public Rigidbody2D rigidbody;
     public GameObject shell;
 

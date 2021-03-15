@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class BaseBullet : MonoBehaviour
 {
-   // public BulletDataScrObj bulletData;
+    // public BulletDataScrObj bulletData;
 
     float bulletDamage;
     float bulletSpeed;
@@ -23,8 +23,11 @@ public class BaseBullet : MonoBehaviour
 
     public ParticleSystem bulletSparks;
     public GameObject dustFX;
-    
-   
+
+    public BaseBullet()
+    {
+
+    }
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -53,6 +56,11 @@ public class BaseBullet : MonoBehaviour
         bulletSpeed = _speed;
         timeToDisappear = _time;
         valueSet = true;
+    }
+    public virtual void SetValue(BulletData _data)
+    {
+        
+
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)

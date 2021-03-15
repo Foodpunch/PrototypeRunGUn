@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1102b8bcbf1539a4f9c8435bc02916e8, type: 3}
-  m_Name: GunDataList
+  m_Script: {fileID: 11500000, guid: 8867860be560a86458ccbe920358d115, type: 3}
+  m_Name: BaseGun
   m_EditorClassIdentifier: 
-  gunDataList:
-  - {fileID: 11400000, guid: 2eda7ec87fc8d3e40bdcc75d5f0bb033, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  name: Basegun
+  firerate: 15
+  damage: 1
+  projectileSpeed: 25
+  recoil: 10
+  GunType: 0
+  bullet: {fileID: 11400000, guid: 1904d3748ea5f2b4a9a44accbbb762ed, type: 2}

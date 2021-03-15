@@ -16,8 +16,8 @@ public class BaseGun : MonoBehaviour
 
     //change to take gun data scriptable obj in the future
     //BulletDataScrObj bulletData;
+    public GunStats gunStats;         //gun stats
     public BaseBullet bullet;       //Bullet that the gun uses    
-
     float nextTimeToFire;           
     protected Vector3 shootDirection = Vector3.right;     //default shoot direction faces right
    
@@ -25,6 +25,14 @@ public class BaseGun : MonoBehaviour
 
     protected PlayerScript player;
 
+
+    //public BaseGun(GunStats gunStats)
+    //{
+    //    fireRate = gunStats.firerate;
+    //    damage = gunStats.damage;
+    //    projectileSpeed = gunStats.projectileSpeed;
+    //    recoil = gunStats.recoil;
+    //}
     //Vector3 lastShootPos = Vector3.zero;                       //last direction gun was facing
     // Start is called before the first frame update
     protected virtual void Awake()
@@ -34,8 +42,15 @@ public class BaseGun : MonoBehaviour
     protected virtual void Start()
     {
         player = PlayerScript.instance.GetComponent<PlayerScript>();
+        SetGunStats(gunStats); 
     }
-
+    protected void SetGunStats(GunStats _gunStat)
+    {
+        fireRate = _gunStat.firerate;
+        damage = _gunStat.damage;
+        projectileSpeed = _gunStat.projectileSpeed;
+        recoil = _gunStat.recoil;
+    }
     // Update is called once per frame
     protected virtual void Update()
     {

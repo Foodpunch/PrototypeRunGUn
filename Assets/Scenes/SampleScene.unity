@@ -327,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498597bd3d87d6046a01c089e5215393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: 2eda7ec87fc8d3e40bdcc75d5f0bb033, type: 2}
 --- !u!114 &451197624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,11 +335,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451197620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 491f31c1c6b87dc49b8683a1c1059e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunStats: {fileID: 0}
   bullet: {fileID: -7689539405470390441, guid: 3dd2d5baf5b88c144b60650ca49aa9c4, type: 3}
 --- !u!114 &451197625
 MonoBehaviour:
@@ -352,6 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24aeeccdffe9612438a235b1d97e27a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunStats: {fileID: 0}
   bullet: {fileID: -7689539405470390441, guid: 3dd2d5baf5b88c144b60650ca49aa9c4, type: 3}
 --- !u!114 &451197626
 MonoBehaviour:
@@ -365,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e5f32b42859354f87eb0442745966c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunStats: {fileID: 0}
   bullet: {fileID: -7689539405470390441, guid: 3dd2d5baf5b88c144b60650ca49aa9c4, type: 3}
 --- !u!1 &519420028
 GameObject:
@@ -493,6 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24aeeccdffe9612438a235b1d97e27a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunStats: {fileID: 0}
   bullet: {fileID: -7689539405470390441, guid: 3dd2d5baf5b88c144b60650ca49aa9c4, type: 3}
 --- !u!212 &641305953
 SpriteRenderer:
