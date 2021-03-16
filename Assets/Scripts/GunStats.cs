@@ -7,9 +7,11 @@ public class GunStats :ScriptableObject
 {
     public new string name;
     public float firerate;
-    public float damage;
-    public float projectileSpeed = 25f;
-    public float recoil= 10f;
+    public float damageMult;
+    public float shotSpeedMult;
+    public int pelletCount;
+    public float spreadAngle;
+    public float recoil;
     public enum GunFiringType   //For searching other gun types in the future?
     {
         DEFAULT,        //single shot, linear
@@ -18,5 +20,15 @@ public class GunStats :ScriptableObject
         PROJECTILE      //RB Projectiles
     }
     public GunFiringType GunType = GunFiringType.DEFAULT;
-    public BulletData bullet;
+    public BulletStats bulletStats;
+    public string Debug()
+    {
+        return "Name: " + name + "\n" +
+            "Firerate: " + firerate + "\n" +
+            "Damage: " + damageMult + "\n" +
+            "ProjectileSpeed: " + shotSpeedMult + "\n" +
+            "PelletCount: " + pelletCount + "\n" +
+            "Spread Angle: " + spreadAngle + "\n" +
+            "Recoil" + recoil + "";
+    }
 }

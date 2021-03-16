@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class BaseBullet : MonoBehaviour
+public class BaseBullet : MonoBehaviour,IBullet
 {
     // public BulletDataScrObj bulletData;
 
@@ -19,20 +19,14 @@ public class BaseBullet : MonoBehaviour
     Rigidbody2D _rb;                //bullet's rigidbody
 
     //particle fx for the bullet?
+    //BulletStats _stats;
 
-
-    public ParticleSystem bulletSparks;
-    public GameObject dustFX;
-
-    public BaseBullet()
-    {
-
-    }
+    //public ParticleSystem bulletSparks;
+    //public GameObject dustFX;
     // Start is called before the first frame update
     protected virtual void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
-        
     }
 
     // Update is called once per frame
@@ -46,21 +40,24 @@ public class BaseBullet : MonoBehaviour
                 Despawn();
             }
             _rb.velocity = transform.right * bulletSpeed;
+           // _rb.velocity = transform.right * bulletSpeed;
             //_rb.AddForce(transform.right * bulletSpeed*Time.deltaTime, ForceMode2D.Impulse);
             //_rb.MovePosition(transform.position + transform.right * bulletSpeed*Time.deltaTime);
         }
     }
-    public virtual void SetValue(float _dmg,float _speed, float _time = 5f)
+    //public virtual void SetValue(float _dmg,BulletStats _data)
+    //{
+    //    bulletDamage = _dmg;
+    //    bulletSpeed = _data.Speed;
+    //    timeToDisappear = _data.TimeToDisappear;
+    //    valueSet = true;
+    //}
+    public virtual void SetValue(BulletStats _bulletStats,GunStats _gunStats)
     {
-        bulletDamage = _dmg;
-        bulletSpeed = _speed;
-        timeToDisappear = _time;
+        bulletDamage = _bulletStats.damage * _gunStats.damageMult;
+        timeToDisappear = _bulletStats.timeToDisappear;
+        bulletSpeed = _bulletStats.speed * _gunStats.shotSpeedMult;
         valueSet = true;
-    }
-    public virtual void SetValue(BulletData _data)
-    {
-        
-
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
@@ -96,4 +93,9 @@ public class BaseBullet : MonoBehaviour
       //  bulletEffects.SpawnAllFX(contact);
     }
     
+}
+
+public interface IBullet
+{
+   void SetValue(BulletStats bulletStats, GunStats gunStats);
 }

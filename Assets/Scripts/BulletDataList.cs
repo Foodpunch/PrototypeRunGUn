@@ -9,9 +9,9 @@ public class BulletDataList : ScriptableObject
     public static BulletDataList Instance { get => instance; set => instance = value; }
 
 
-    public List<BulletData> bulletDataList;
+    public List<BulletStats> bulletDataList;
 
-    public BulletData GetByName(string name)
+    public BulletStats GetByName(string name)
     {
         for(int i = 0; i< bulletDataList.Count; i++)
         {
@@ -23,7 +23,7 @@ public class BulletDataList : ScriptableObject
         throw new System.Exception("No such bullet name exists!");
     }
    
-    public BulletData GetByType(BulletData bullet)
+    public BulletStats GetByType(BulletStats bullet)
     {
         for (int i = 0; i < bulletDataList.Count; i++)
         {

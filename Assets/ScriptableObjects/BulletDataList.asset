@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletDataList:
   - {fileID: 11400000, guid: 1904d3748ea5f2b4a9a44accbbb762ed, type: 2}
+  - {fileID: 11400000, guid: a4edfab8412f4194f8329bc0f1a78d5e, type: 2}

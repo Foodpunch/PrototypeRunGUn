@@ -5,9 +5,9 @@ using UnityEngine;
 public class BaseGun : MonoBehaviour
 {
     public static bool isFiring;
-    protected float fireRate =20f;          //rate at which gun fires; number of shots persecond
-    protected float damage;            //damage the bullet does
-    protected float projectileSpeed = 25f;        //force at which bullet flies out at
+    protected float fireRate;          //rate at which gun fires; number of shots persecond
+    protected float gunDamageMult;            //damage the bullet does
+    protected float gunShotSpeedMult =1f;        //force at which bullet flies out at
     protected float recoil =10f;             //change to curve in the future?
 
     protected float shootBuffer = 0.2f;     //buffered time for shooting
@@ -17,11 +17,15 @@ public class BaseGun : MonoBehaviour
     //change to take gun data scriptable obj in the future
     //BulletDataScrObj bulletData;
     public GunStats gunStats;         //gun stats
-    public BaseBullet bullet;       //Bullet that the gun uses    
+    protected BulletStats bulletStats;
+
+    protected GameObject bullet;       //Bullet that the gun uses    
+
+
     float nextTimeToFire;           
     protected Vector3 shootDirection = Vector3.right;     //default shoot direction faces right
    
-    protected Quaternion gunRotation;                             //rotation for gun direction
+  //  protected Quaternion gunRotation;                             //rotation for gun direction
 
     protected PlayerScript player;
 
@@ -42,13 +46,14 @@ public class BaseGun : MonoBehaviour
     protected virtual void Start()
     {
         player = PlayerScript.instance.GetComponent<PlayerScript>();
-        SetGunStats(gunStats); 
+        bullet = gunStats.bulletStats.bulletPrefab;      
+       // SetGunStats(gunStats); 
     }
-    protected void SetGunStats(GunStats _gunStat)
+    public void SetGunStats(GunStats _gunStat)
     {
         fireRate = _gunStat.firerate;
-        damage = _gunStat.damage;
-        projectileSpeed = _gunStat.projectileSpeed;
+        gunDamageMult = _gunStat.damageMult;
+        gunShotSpeedMult = _gunStat.shotSpeedMult;
         recoil = _gunStat.recoil;
     }
     // Update is called once per frame
@@ -76,7 +81,8 @@ public class BaseGun : MonoBehaviour
             {
              //   CameraManager.instance.Shake(0.3f);
                 SpawnBullet();
-                nextTimeToFire = Time.time + (1f / fireRate);
+                SpawnShells();
+                nextTimeToFire = Time.time + (1f / gunStats.firerate);
             }
 
         }
@@ -89,10 +95,18 @@ public class BaseGun : MonoBehaviour
 
     protected virtual void SpawnBullet()
     {
-        BaseBullet bulletClone = Instantiate(bullet, transform.position, transform.rotation);
-        bulletClone.GetComponent<BaseBullet>().SetValue(damage, projectileSpeed);
-
+        GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);
+        bulletClone.GetComponent<IBullet>().SetValue(gunStats.bulletStats,gunStats);
         
+    }
+    protected virtual void SpawnShells()  //arbitrary implementation for the time being
+    {
+        GameObject shellClone = Instantiate(gunStats.bulletStats.shell, transform.position, transform.rotation);
+        Vector3 shellDirection = Vector3.up - transform.right;
+        shellClone.GetComponent<Rigidbody2D>().AddForce(shellDirection*4f, ForceMode2D.Impulse);
+        float dotProduct = Vector3.Dot(shootDirection, -shellDirection);
+        //positive value is anti clockwise direction, negative is clockwise
+        shellClone.GetComponent<Rigidbody2D>().AddTorque(Random.value*dotProduct,ForceMode2D.Impulse);
     }
 
 

@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8867860be560a86458ccbe920358d115, type: 3}
   m_Name: BaseGun
   m_EditorClassIdentifier: 
-  name: Basegun
-  firerate: 15
-  damage: 1
-  projectileSpeed: 25
+  name: Pistol
+  firerate: 5
+  damageMult: 0
+  shotSpeedMult: 1
+  pelletCount: 0
+  spreadAngle: 0
   recoil: 10
   GunType: 0
-  bullet: {fileID: 11400000, guid: 1904d3748ea5f2b4a9a44accbbb762ed, type: 2}
+  bulletStats: {fileID: 11400000, guid: 1904d3748ea5f2b4a9a44accbbb762ed, type: 2}

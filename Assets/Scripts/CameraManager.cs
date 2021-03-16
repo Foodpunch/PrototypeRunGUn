@@ -24,7 +24,7 @@ public class CameraManager : MonoBehaviour
     public float maxAngle, maxOffset;
     GameObject player;
     float offset = 0f;              //offsets perlin noise, changing Y axis
-    float mult = 10f;               //multiplier for how drastic to scroll perlin
+    float mult = 55f;               //multiplier for how drastic to scroll perlin
     bool isSustained;
     private void Awake()
     {
