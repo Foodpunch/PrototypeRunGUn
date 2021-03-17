@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public EffectsData BulletEffectsData;
     public BulletDataList BulletDataList;
 
     private void Awake()

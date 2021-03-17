@@ -18,6 +18,6 @@ MonoBehaviour:
   shotSpeedMult: 1
   pelletCount: 0
   spreadAngle: 0
-  recoil: 10
+  recoil: 15
   GunType: 2
   bulletStats: {fileID: 11400000, guid: 1904d3748ea5f2b4a9a44accbbb762ed, type: 2}

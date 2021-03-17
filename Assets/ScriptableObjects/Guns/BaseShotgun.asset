@@ -15,9 +15,9 @@ MonoBehaviour:
   name: Shotgun
   firerate: 1
   damageMult: 0
-  shotSpeedMult: 0.2
+  shotSpeedMult: 1
   pelletCount: 5
   spreadAngle: 15
-  recoil: 10
+  recoil: 20
   GunType: 1
   bulletStats: {fileID: 11400000, guid: a4edfab8412f4194f8329bc0f1a78d5e, type: 2}

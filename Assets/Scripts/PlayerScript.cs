@@ -182,6 +182,8 @@ public class PlayerScript : MonoBehaviour
         forceDir.Normalize();
         if (forceDir.y > 0f)
             _rb.velocity = new Vector2(0, forceDir.y * force);
-
+        //else _rb.velocity = _rb.velocity;
+        //float y = Mathf.Clamp((forceDir.y * force), 0, jumpVelocity);
+        //_rb.velocity = new Vector2(0, y);
     }
 }

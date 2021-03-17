@@ -97,7 +97,8 @@ public class BaseGun : MonoBehaviour
     {
         GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.GetComponent<IBullet>().SetValue(gunStats.bulletStats,gunStats);
-        
+        player.GunRecoilVert(gunStats.recoil - (player.hoverTime * gunStats.firerate));
+
     }
     protected virtual void SpawnShells()  //arbitrary implementation for the time being
     {

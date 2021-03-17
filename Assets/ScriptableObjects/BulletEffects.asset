@@ -13,13 +13,18 @@ MonoBehaviour:
   m_Name: BulletEffects
   m_EditorClassIdentifier: Assembly-CSharp::EffectsData
   EffectsList:
-  - name: Bullet Sparks
-    gameObject: {fileID: 5660942414202970350, guid: ba7f53df4a2645344b654b113477b6e6,
-      type: 3}
-    OriginDirection: {x: 1, y: 0, z: 0}
+  - name: 
+    gameObject: {fileID: 0}
+    Type: 0
+    OriginDirection: {x: 0, y: 0, z: 0}
     audioClip: {fileID: 0}
-  - name: BulletDust
-    gameObject: {fileID: 574301091784274921, guid: c1fc7207d20e68a4ba400d3da513db4a,
-      type: 3}
-    OriginDirection: {x: 0, y: 1, z: 0}
+  - name: 
+    gameObject: {fileID: 0}
+    Type: 0
+    OriginDirection: {x: 0, y: 0, z: 0}
+    audioClip: {fileID: 0}
+  - name: 
+    gameObject: {fileID: 0}
+    Type: 0
+    OriginDirection: {x: 0, y: 0, z: 0}
     audioClip: {fileID: 0}
