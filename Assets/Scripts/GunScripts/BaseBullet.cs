@@ -96,7 +96,3 @@ public class BaseBullet : MonoBehaviour,IBullet
     
 }
 
-public interface IBullet
-{
-   void SetValue(BulletStats bulletStats, GunStats gunStats);
-}
