@@ -6,6 +6,8 @@ public class PlayerScript : MonoBehaviour
 {
 
     [SerializeField] LayerMask platformMask;
+    [SerializeField] LayerMask downJumpMask;
+    LayerMask defaultMask;
     float moveSpeed = 5f;
 
     float jumpVelocity = 10f;
@@ -32,6 +34,7 @@ public class PlayerScript : MonoBehaviour
 
     public static PlayerScript instance;
 
+    bool isDownJump;
     //[Range(0, 1)]
     //float jumpLimit = 0.5f;             //makes it so that holding jump gets you higher
     private void Awake()
@@ -42,6 +45,7 @@ public class PlayerScript : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<BoxCollider2D>();
+        defaultMask = gameObject.layer;
     }
     private void FixedUpdate()
     {
@@ -54,7 +58,9 @@ public class PlayerScript : MonoBehaviour
         MovementInput();
         SetGunDirectionToMouse();
     }
-    bool IsGrounded()   //uses boxcast to check if grounded
+    bool IsGrounded()   //uses boxcast to check if grounded 
+        //causes potential bug when boxcast is still clipping into the platform as player is falling through it
+        //which delays the hovertimer from starting allowing the player to fall through multiple platforms if too close.
     {
         RaycastHit2D _raycast2D =  Physics2D.BoxCast(_col.bounds.center, _col.bounds.size, 0f, Vector2.down, .15f,platformMask);
         return (_raycast2D.collider != null);
@@ -80,7 +86,11 @@ public class PlayerScript : MonoBehaviour
         }
         if(Input.GetButton("Down"))         //crouching and stuff
         {
-
+            if(Input.GetButtonDown("Jump")&&IsGrounded())
+            {
+                isDownJump=true;
+                gameObject.layer = LayerMask.NameToLayer("DownJumpLayer");
+            }
         }
         if(Input.GetButton("Up"))           //might not be needed
         {
@@ -91,6 +101,11 @@ public class PlayerScript : MonoBehaviour
             hoverTime += Time.deltaTime;
         }
         else hoverTime = 0;
+        if (isDownJump && hoverTime > 0f)
+        {
+            gameObject.layer = defaultMask.value;
+            isDownJump = false;
+        }
     }
     void JumpLogic()
     {
@@ -100,7 +115,7 @@ public class PlayerScript : MonoBehaviour
         if (IsGrounded()) groundTime = coyoteTime;
      
         //Jump buffer
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump")&&!Input.GetButton("Down"))
         {
             if(groundTime > 0 && jumpPressTime < -(jumpTimeBuffer*2))
             {

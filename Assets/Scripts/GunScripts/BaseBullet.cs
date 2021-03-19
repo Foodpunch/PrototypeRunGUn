@@ -72,7 +72,8 @@ public class BaseBullet : MonoBehaviour,IBullet
                 // ParticleSystem sparksClone = Instantiate(bulletSparks, point, rot);
                 // Quaternion rot2 = Quaternion.FromToRotation(Vector3.up, normal);
                 // GameObject dustClone = Instantiate(dustFX, point, rot2);
-
+                if(contact.collider.gameObject.GetComponent<IDamageable>()!=null)
+                contact.collider.gameObject.GetComponent<IDamageable>().OnTakeDamage(bulletDamage,contact);
                 SpawnBulletEffects(contact);
 
                 Despawn();

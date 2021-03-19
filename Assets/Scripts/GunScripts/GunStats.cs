@@ -6,6 +6,7 @@ using UnityEngine;
 public class GunStats :ScriptableObject
 {
     public new string name;
+    public int ammo;
     public float firerate;
     public float damageMult;
     public float shotSpeedMult;

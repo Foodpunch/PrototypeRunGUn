@@ -16,8 +16,7 @@ public class BaseShotgun : BaseGun
 
     protected override void SpawnBullet()
     {
-       // Debug.Log("BulletStats: " + gunStats.bulletStats.Debug());
-
+        // Debug.Log("BulletStats: " + gunStats.bulletStats.Debug());
         for (int i=0; i < gunStats.pelletCount; i++)
         {
             float spreadRange = Random.Range(-gunStats.spreadAngle / 2, gunStats.spreadAngle / 2);

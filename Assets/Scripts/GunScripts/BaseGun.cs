@@ -10,6 +10,8 @@ public class BaseGun : MonoBehaviour
     protected float gunShotSpeedMult =1f;        //force at which bullet flies out at
     protected float recoil =10f;             //change to curve in the future?
 
+    public float currentAmmo;
+
     protected float shootBuffer = 0.2f;     //buffered time for shooting
     float shootDuration;                    //=guntime + buffer time
     protected float gunTime;            //potentially anim curve related stuff
@@ -46,8 +48,13 @@ public class BaseGun : MonoBehaviour
     protected virtual void Start()
     {
         player = PlayerScript.instance.GetComponent<PlayerScript>();
-        bullet = gunStats.bulletStats.bulletPrefab;      
+        bullet = gunStats.bulletStats.bulletPrefab;
+        currentAmmo = gunStats.ammo;
        // SetGunStats(gunStats); 
+    }
+    protected virtual void OnEnable()   //small hack for testing
+    {
+        currentAmmo = gunStats.ammo;
     }
     public void SetGunStats(GunStats _gunStat)
     {
@@ -79,8 +86,10 @@ public class BaseGun : MonoBehaviour
             gunTime += Time.deltaTime;
             if (Time.time >= nextTimeToFire)
             {
-             //   CameraManager.instance.Shake(0.3f);
+                //   CameraManager.instance.Shake(0.3f);
+                DeductAmmo();
                 SpawnBullet();
+                
                 SpawnShells();
                 nextTimeToFire = Time.time + (1f / gunStats.firerate);
             }
@@ -92,7 +101,11 @@ public class BaseGun : MonoBehaviour
             gunTime = 0;
         }
     }
-
+    protected virtual void DeductAmmo()
+    {
+        if (currentAmmo > 0) currentAmmo--;
+        else WeaponManager.instance.ChangeWeapon();
+    }
     protected virtual void SpawnBullet()
     {
         GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);

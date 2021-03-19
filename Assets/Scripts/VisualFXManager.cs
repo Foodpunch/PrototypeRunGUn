@@ -8,6 +8,7 @@ public class VisualFXManager : MonoBehaviour
     public List<Effects> effectsList;
 
 
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -26,6 +27,10 @@ public class VisualFXManager : MonoBehaviour
     public void SpawnFXType(Effects.EffectType _type, ContactPoint2D contact)
     {
         SpawnFX(GetEffectsByType(_type), contact);
+    }
+    public void SpawnFXType(Effects.EffectType effectType,Vector3 pos)
+    {
+        SpawnFX(GetEffectsByType(effectType), pos, Quaternion.identity);
     }
     //public void SpawnBulletFX(ContactPoint2D contact)
     //{
@@ -57,6 +62,15 @@ public class VisualFXManager : MonoBehaviour
         {
             Effects _fx = new Effects(_list[i], contact);
             GameObject FXClone = Instantiate(_fx.gameObject, _fx.Position, _fx.Rotation);
+            FXClone.transform.SetParent(gameObject.transform);
+        }
+    }
+    void SpawnFX(List<Effects> _list,Vector3 pos,Quaternion quat)
+    {
+        for (int i = 0; i < _list.Count; i++)
+        {
+            Effects _fx = new Effects(_list[i],new ContactPoint2D());
+            GameObject FXClone = Instantiate(_fx.gameObject, pos, quat);
             FXClone.transform.SetParent(gameObject.transform);
         }
     }

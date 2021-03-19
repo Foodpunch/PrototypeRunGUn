@@ -16,8 +16,8 @@ TagManager:
   - Platforms
   - Projectile
   - BulletShells
-  - 
-  - 
+  - FlyingEnemy
+  - DownJumpLayer
   - 
   - 
   - 

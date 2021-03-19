@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: BaseMachinegun
   m_EditorClassIdentifier: 
   name: Machinegun
-  firerate: 20
-  damageMult: 0
+  ammo: 100
+  firerate: 15
+  damageMult: 3
   shotSpeedMult: 1
   pelletCount: 0
   spreadAngle: 0
-  recoil: 15
+  recoil: 8
   GunType: 2
   bulletStats: {fileID: 11400000, guid: 1904d3748ea5f2b4a9a44accbbb762ed, type: 2}

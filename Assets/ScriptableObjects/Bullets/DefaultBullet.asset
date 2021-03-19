@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultBullet
   m_EditorClassIdentifier: Assembly-CSharp::BulletStats
   name: Bullet
-  damage: 0
+  damage: 1
   speed: 15
   timeToDisappear: 5
   bulletPrefab: {fileID: 5203015330715472026, guid: 3dd2d5baf5b88c144b60650ca49aa9c4,

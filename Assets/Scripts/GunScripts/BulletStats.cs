@@ -7,7 +7,6 @@ public class BulletStats : ScriptableObject
 {
     public new string name;
     //public Sprite sprite;
-    [HideInInspector]
     public float damage;
     public float speed;
     public float timeToDisappear;

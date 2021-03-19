@@ -10,6 +10,8 @@ public class CameraManager : MonoBehaviour
     float trauma;
 
     float shake;
+    float slow;
+    float slowDuration;
     /*  Camera Shake Implementation from GDC
      *  trauma -= Time.deltaTime; 
      *  shake = trauma^ or trauma^3
@@ -38,6 +40,7 @@ public class CameraManager : MonoBehaviour
     public void Shake(float _trauma,bool _isSustained = false)
     {
         trauma += _trauma;
+        slowDuration = 0.2f;
         if (_isSustained) trauma = Mathf.Clamp(trauma, 0f, _trauma);
         offset++;
     }
@@ -57,7 +60,7 @@ public class CameraManager : MonoBehaviour
             CameraShake();
         }
         trauma = Mathf.Clamp(trauma, 0f, 1f);
-
+        TimeSlow();
     }
 
     void CameraShake()
@@ -70,7 +73,19 @@ public class CameraManager : MonoBehaviour
         transform.rotation = Camera.main.transform.rotation * Quaternion.Euler(new Vector3(0f, 0f, angle));
         transform.position = Camera.main.transform.position + new Vector3(offsetX, offsetY, 0f);
     }
-    
+    void TimeSlow()
+    {
+        if (slowDuration > 0f)
+        {
+            Time.timeScale = 0.05f;
+            slowDuration -= Time.unscaledDeltaTime;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            slowDuration = 0f;
+        }
+    }
     float GetPerlinNoise(float time)
     {
        return Mathf.PerlinNoise(time*mult, offset) - 0.5f;

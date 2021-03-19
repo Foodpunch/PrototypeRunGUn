@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: BaseShotgun
   m_EditorClassIdentifier: 
   name: Shotgun
+  ammo: 10
   firerate: 1
-  damageMult: 0
+  damageMult: 5
   shotSpeedMult: 1
   pelletCount: 5
-  spreadAngle: 15
+  spreadAngle: 25
   recoil: 20
   GunType: 1
   bulletStats: {fileID: 11400000, guid: a4edfab8412f4194f8329bc0f1a78d5e, type: 2}

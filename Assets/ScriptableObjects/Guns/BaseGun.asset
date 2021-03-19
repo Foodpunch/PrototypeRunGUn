@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: BaseGun
   m_EditorClassIdentifier: 
   name: Pistol
+  ammo: 20
   firerate: 5
-  damageMult: 0
+  damageMult: 1
   shotSpeedMult: 1
   pelletCount: 0
   spreadAngle: 0
