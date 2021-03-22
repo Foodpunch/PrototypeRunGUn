@@ -63,6 +63,7 @@ public class BaseEntity : MonoBehaviour,IDamageable
         CameraManager.instance.Shake(0.2f);
 
         VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
+        CameraManager.instance.ripple.Emit(Camera.current.WorldToViewportPoint(transform.position));
         _col.enabled = false;
         _rb.gravityScale = 1f;
        // _rb.Sleep();

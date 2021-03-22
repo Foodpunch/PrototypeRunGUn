@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager instance;
+    public RippleEffect ripple;
     [SerializeField]
     [Range(0f,1f)]
     float trauma;
@@ -36,6 +37,7 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         player = PlayerScript.instance.gameObject;
+        ripple = GetComponent<RippleEffect>();
     }
     public void Shake(float _trauma,bool _isSustained = false)
     {
