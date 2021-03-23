@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public event Action onEnemyDeathEvent;
     public BulletDataList BulletDataList;
 
     private void Awake()

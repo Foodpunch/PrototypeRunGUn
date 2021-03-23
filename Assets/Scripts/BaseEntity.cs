@@ -10,8 +10,12 @@ public class BaseEntity : MonoBehaviour,IDamageable
     protected float speed =0.2f;
     protected float damage;
     float currentHealth;
+    [SerializeField]
+    protected GameObject projectile;
 
-    float stopRadiusSqrd = 16f;
+    [SerializeField]
+    protected EntityStats entityStats;
+
     protected float distSqrd;
     
 
@@ -23,31 +27,15 @@ public class BaseEntity : MonoBehaviour,IDamageable
     ContactPoint2D _contact;
     protected bool isDead = false;
 
-    public event Action onDeathEvent;
+    
 
-    public void OnTakeDamage(float _damage,ContactPoint2D contact)
-    {
-        _contact = contact;
-        if(!isDead)
-        {
-            currentHealth -= _damage;
-            //if (currentHealth > 0) //play hurt sound && flashing effect
-            HurtBehaviour();
-            if (currentHealth <= 0f)
-            {
-                OnDeath();
-            }
-        }
-        
-    }
-   
     // Start is called before the first frame update
     protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
         _col = GetComponent<Collider2D>();
-
+        GameManager.instance.onEnemyDeathEvent += OnDeath;
         currentHealth = maxHealth;
     }
 
@@ -61,12 +49,10 @@ public class BaseEntity : MonoBehaviour,IDamageable
     public virtual void OnDeath()
     {
         CameraManager.instance.Shake(0.2f);
-
         VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
-        CameraManager.instance.ripple.Emit(Camera.current.WorldToViewportPoint(transform.position));
         _col.enabled = false;
+        CameraManager.instance.ripple.Emit(transform.position);
         _rb.gravityScale = 1f;
-       // _rb.Sleep();
         isDead = true;
         //play whatever anim needs to be played
 
@@ -79,36 +65,29 @@ public class BaseEntity : MonoBehaviour,IDamageable
     }
     protected virtual void HurtBehaviour()     
     {
+        //logic when AI gets hurt
 
     }
     protected virtual void DoBehaviour()
     {
-        float f = Map(distSqrd, 0, speed, 0, stopRadiusSqrd);
-        _rb.velocity = new Vector2(0, DirectionToPlayer.y)*f;
-        //if(f <=0.015f)
-        //{
-        //    Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, stopRadiusSqrd / 2);
-        //    foreach (Collider2D obj in colliders)
-        //    {
-        //        if (obj.GetComponent<IDamageable>() != null)
-        //        {
-        //            //bj.GetComponent<IDamageable>().OnTakeDamage(damage, 0, transform.position, false);
-        //        }
-        //        Rigidbody2D otherRBs = obj.GetComponent<Rigidbody2D>();
-        //        if (otherRBs != null)
-        //        {
-        //            Vector3 dir = (obj.transform.position - transform.position).normalized;
-        //            Vector2 dir2D = new Vector2(dir.x, dir.y);
-        //            otherRBs.AddTorque(0.1f);
-        //            otherRBs.AddForce(dir2D * damage * 10f,ForceMode2D.Impulse);
-        //        }
-        //    }
-        //    if(currentHealth > 0)
-        //    {
-        //        OnDeath();
-        //    }
-        //}
+        //logic for AI to execute
     }
+
+
+    public void OnTakeDamage(StatWrapper Stats, ContactPoint2D contact)
+    {
+        _contact = contact;
+        if (!isDead)
+        {
+            currentHealth -= Stats.damage;
+            HurtBehaviour();
+            if (currentHealth <= 0f)
+            {
+                OnDeath();
+            }
+        }
+    }
+
 
     #region Map explanation
     //how map works is that value will be "clamped" according to the speed and range.

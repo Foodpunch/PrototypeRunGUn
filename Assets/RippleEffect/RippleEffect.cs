@@ -33,7 +33,8 @@ public class RippleEffect : MonoBehaviour
 
     [SerializeField, HideInInspector]
     Shader shader;
-
+    [SerializeField]
+    Camera camera;
     class Droplet
     {
         Vector2 position;
@@ -82,6 +83,7 @@ public class RippleEffect : MonoBehaviour
 
     void Awake()
     {
+        camera = GetComponent<Camera>();
         droplets = new Droplet[3];
         droplets[0] = new Droplet();
         droplets[1] = new Droplet();
@@ -128,6 +130,7 @@ public class RippleEffect : MonoBehaviour
 
     public void Emit(Vector2 pos)           //call this function for the waterdroplet effect
     {
-        droplets[dropCount++ % droplets.Length].Reset(pos);
+        Vector2 vppos = camera.WorldToViewportPoint(pos);
+        droplets[dropCount++ % droplets.Length].Reset(vppos);
     }
 }

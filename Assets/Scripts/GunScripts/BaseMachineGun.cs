@@ -17,9 +17,9 @@ public class BaseMachineGun : BaseGun
     protected override void SpawnBullet()
     {
         //Vector2 bulletOffset = transform.up*bulletPattern.Evaluate(gunTime);
-        Vector2 bulletOffset = transform.up * Mathf.Sin(gunTime*gunStats.firerate) * magnitude;      //fire rate = frequency of curve, magnitude = min/max value of curve
+        Vector2 bulletOffset = transform.up * Mathf.Sin(gunTime*gunStat.fireRate) * magnitude;      //fire rate = frequency of curve, magnitude = min/max value of curve
         GameObject bulletClone = Instantiate(bullet, transform.position+(Vector3)bulletOffset, transform.rotation);
-        bulletClone.GetComponent<IBullet>().SetValue(gunStats.bulletStats,gunStats);
-        player.GunRecoilVert(gunStats.recoil-(player.hoverTime*gunStats.firerate));
+        bulletClone.GetComponent<IBullet>().SetValue(gunStat);
+        player.GunRecoilVert(gunStat.recoil-(player.hoverTime*gunStat.fireRate));
     }
 }

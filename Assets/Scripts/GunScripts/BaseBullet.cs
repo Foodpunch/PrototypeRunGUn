@@ -18,6 +18,9 @@ public class BaseBullet : MonoBehaviour,IBullet
     float bulletAirTime;            //time bullet has been in the air for
     Rigidbody2D _rb;                //bullet's rigidbody
 
+    public ProjectileStats projectileStats;
+    StatWrapper Stats;
+    public GameObject bulletShell;
     //particle fx for the bullet?
     //BulletStats _stats;
 
@@ -27,6 +30,7 @@ public class BaseBullet : MonoBehaviour,IBullet
     protected virtual void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
+        timeToDisappear = projectileStats.timeToDisappear;
     }
 
     // Update is called once per frame
@@ -39,7 +43,8 @@ public class BaseBullet : MonoBehaviour,IBullet
             {
                 Despawn();
             }
-            _rb.velocity = transform.right * bulletSpeed;
+            if(!bGravityInfluence)
+            _rb.velocity = transform.right * Stats.speed;
            // _rb.velocity = transform.right * bulletSpeed;
             //_rb.AddForce(transform.right * bulletSpeed*Time.deltaTime, ForceMode2D.Impulse);
             //_rb.MovePosition(transform.position + transform.right * bulletSpeed*Time.deltaTime);
@@ -52,13 +57,12 @@ public class BaseBullet : MonoBehaviour,IBullet
     //    timeToDisappear = _data.TimeToDisappear;
     //    valueSet = true;
     //}
-    public virtual void SetValue(BulletStats _bulletStats,GunStats _gunStats)
+    public virtual void SetValue(EntityStats eStats)
     {
-        bulletDamage = _bulletStats.damage * _gunStats.damageMult;
-        timeToDisappear = _bulletStats.timeToDisappear;
-        bulletSpeed = _bulletStats.speed * _gunStats.shotSpeedMult;
+        Stats = new StatWrapper(projectileStats, eStats);
         valueSet = true;
     }
+ 
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
@@ -73,7 +77,7 @@ public class BaseBullet : MonoBehaviour,IBullet
                 // Quaternion rot2 = Quaternion.FromToRotation(Vector3.up, normal);
                 // GameObject dustClone = Instantiate(dustFX, point, rot2);
                 if(contact.collider.gameObject.GetComponent<IDamageable>()!=null)
-                contact.collider.gameObject.GetComponent<IDamageable>().OnTakeDamage(bulletDamage,contact);
+                contact.collider.gameObject.GetComponent<IDamageable>().OnTakeDamage(Stats,contact);
                 SpawnBulletEffects(contact);
 
                 Despawn();

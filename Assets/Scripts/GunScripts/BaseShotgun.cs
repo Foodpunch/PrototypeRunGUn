@@ -17,13 +17,13 @@ public class BaseShotgun : BaseGun
     protected override void SpawnBullet()
     {
         // Debug.Log("BulletStats: " + gunStats.bulletStats.Debug());
-        for (int i=0; i < gunStats.pelletCount; i++)
+        for (int i=0; i < gunStat.pelletCount; i++)
         {
-            float spreadRange = Random.Range(-gunStats.spreadAngle / 2, gunStats.spreadAngle / 2);
+            float spreadRange = Random.Range(-gunStat.spreadAngle / 2, gunStat.spreadAngle / 2);
             Quaternion randomArc = Quaternion.Euler(0, 0, spreadRange);
             GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation*randomArc);
-            bulletClone.GetComponent<IBullet>().SetValue(gunStats.bulletStats,gunStats);
-            player.GunRecoilVert(gunStats.recoil - (player.hoverTime * gunStats.firerate));
+            bulletClone.GetComponent<IBullet>().SetValue(gunStat);
+            player.GunRecoilVert(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
         }
       
     }

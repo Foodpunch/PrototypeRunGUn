@@ -16,11 +16,12 @@ public class BaseGun : MonoBehaviour
     float shootDuration;                    //=guntime + buffer time
     protected float gunTime;            //potentially anim curve related stuff
 
+    public EntityStats gunStat;
     //change to take gun data scriptable obj in the future
     //BulletDataScrObj bulletData;
-    public GunStats gunStats;         //gun stats
-    protected BulletStats bulletStats;
-
+    //public GunStats gunStats;         //gun stats
+    //protected BulletStats bulletStats;
+    [SerializeField]
     protected GameObject bullet;       //Bullet that the gun uses    
 
 
@@ -48,13 +49,13 @@ public class BaseGun : MonoBehaviour
     protected virtual void Start()
     {
         player = PlayerScript.instance.GetComponent<PlayerScript>();
-        bullet = gunStats.bulletStats.bulletPrefab;
-        currentAmmo = gunStats.ammo;
+        //bullet = gunStats.bulletStats.bulletPrefab;
+        currentAmmo = gunStat.maxAmmo;
        // SetGunStats(gunStats); 
     }
     protected virtual void OnEnable()   //small hack for testing
     {
-        currentAmmo = gunStats.ammo;
+        currentAmmo = gunStat.maxAmmo;
     }
     public void SetGunStats(GunStats _gunStat)
     {
@@ -91,7 +92,7 @@ public class BaseGun : MonoBehaviour
                 SpawnBullet();
                 
                 SpawnShells();
-                nextTimeToFire = Time.time + (1f / gunStats.firerate);
+                nextTimeToFire = Time.time + (1f / gunStat.fireRate);
             }
 
         }
@@ -109,13 +110,14 @@ public class BaseGun : MonoBehaviour
     protected virtual void SpawnBullet()
     {
         GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);
-        bulletClone.GetComponent<IBullet>().SetValue(gunStats.bulletStats,gunStats);
-        player.GunRecoilVert(gunStats.recoil - (player.hoverTime * gunStats.firerate));
+        bulletClone.GetComponent<IBullet>().SetValue(gunStat);
+        player.GunRecoilVert(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
 
     }
     protected virtual void SpawnShells()  //arbitrary implementation for the time being
     {
-        GameObject shellClone = Instantiate(gunStats.bulletStats.shell, transform.position, transform.rotation);
+        GameObject shell = bullet.GetComponent<BaseBullet>().bulletShell;
+        GameObject shellClone = Instantiate(shell, transform.position, transform.rotation);
         Vector3 shellDirection = Vector3.up - transform.right;
         shellClone.GetComponent<Rigidbody2D>().AddForce(shellDirection*4f, ForceMode2D.Impulse);
         float dotProduct = Vector3.Dot(shootDirection, -shellDirection);
