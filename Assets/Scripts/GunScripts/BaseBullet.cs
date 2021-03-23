@@ -76,12 +76,18 @@ public class BaseBullet : MonoBehaviour,IBullet
                 // ParticleSystem sparksClone = Instantiate(bulletSparks, point, rot);
                 // Quaternion rot2 = Quaternion.FromToRotation(Vector3.up, normal);
                 // GameObject dustClone = Instantiate(dustFX, point, rot2);
+                if (contact.collider.gameObject.GetComponent<IBullet>()!= null)
+                    SpawnNullifyEffect();
                 if(contact.collider.gameObject.GetComponent<IDamageable>()!=null)
-                contact.collider.gameObject.GetComponent<IDamageable>().OnTakeDamage(Stats,contact);
-                SpawnBulletEffects(contact);
+                {
+                    contact.collider.gameObject.GetComponent<IDamageable>().OnTakeDamage(Stats, contact);
+                    SpawnBulletEffects(contact);
+                }
+                SpawnEnvirontmentEffect(contact);
+                  
 
                 Despawn();
-                break;
+                return;
             }
         }   
     }
@@ -97,6 +103,14 @@ public class BaseBullet : MonoBehaviour,IBullet
         VisualFXManager.i.SpawnFXType(Effects.EffectType.BULLET, contact);
       //  GameManager.instance.BulletEffectsData.SpawnAllFX(contact);
       //  bulletEffects.SpawnAllFX(contact);
+    }
+    protected virtual void SpawnNullifyEffect()
+    {
+        VisualFXManager.i.SpawnFXType(Effects.EffectType.GENERIC, transform.position);
+    }
+    protected virtual void SpawnEnvirontmentEffect(ContactPoint2D contact)
+    {
+        VisualFXManager.i.SpawnFXType(Effects.EffectType.GENERIC, contact);
     }
     
 }

@@ -15,7 +15,7 @@ public class ShootingEnemy : BaseEntity
         base.DoBehaviour();
 
         float mappedSpeed = Map(distSqrd, 0, speed, 0, stopRadiusSqrd);
-        _rb.velocity = new Vector2(0, DirectionToPlayer.y) * mappedSpeed;
+        _rb.velocity = new Vector2(DirectionToPlayer.x, DirectionToPlayer.y) * mappedSpeed;
 
         if(mappedSpeed <= 0.1f)
         {

@@ -42,7 +42,7 @@ public class CameraManager : MonoBehaviour
     public void Shake(float _trauma,bool _isSustained = false)
     {
         trauma += _trauma;
-        slowDuration = 0.2f;
+        slowDuration = 0.5f;
         if (_isSustained) trauma = Mathf.Clamp(trauma, 0f, _trauma);
         offset++;
     }

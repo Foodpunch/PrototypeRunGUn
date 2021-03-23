@@ -64,10 +64,18 @@ public class PlayerScript : MonoBehaviour
         //causes potential bug when boxcast is still clipping into the platform as player is falling through it
         //which delays the hovertimer from starting allowing the player to fall through multiple platforms if too close.
     {
-        RaycastHit2D _raycast2D =  Physics2D.BoxCast(_col.bounds.center, _col.bounds.size, 0f, Vector2.down, .15f,platformMask);
+        Vector2 colBounds = new Vector2(_col.bounds.size.x, _col.bounds.size.y / 5f);
+        RaycastHit2D _raycast2D =  Physics2D.BoxCast(_col.bounds.center, colBounds, 0f, Vector2.down, .5f,platformMask);
         return (_raycast2D.collider != null);
     }
-
+    private void OnDrawGizmos()
+    {
+        if (_col != null)
+        {
+            Vector2 colBounds = new Vector2(_col.bounds.size.x, _col.bounds.size.y / 5f);
+            Gizmos.DrawCube(_col.bounds.center + ((Vector3)Vector2.down * 0.5f), colBounds);
+        } 
+    }
     void MovementInput()
     {
         if (Input.GetButton("Right"))
@@ -192,8 +200,16 @@ public class PlayerScript : MonoBehaviour
         _rb.velocity += (Vector2)forceDir*force;
     }
 
-    public void GunRecoilVert(float force)
+    public void GunRecoilVert(float force)  
     {
+        /*  Takes angle between vector down and mouse, if angle is within 15deg
+         *  Apply force vertically only, calculated from recoil.
+         *  Player cannot shoot up to go down faster.
+         *  Code below aims to clamp jump force to limit the max height, but it's wrong.
+         */
+        if (IsGrounded()) return;
+        float angle = Vector2.Angle(mouseDir, Vector2.down);
+        if (angle > 15f) return; 
         if (force <= 0) force = 0;
         Vector3 forceDir = -mouseDir;
         forceDir.Normalize();

@@ -7,8 +7,9 @@ public class BaseEntity : MonoBehaviour,IDamageable
 {
     [SerializeField]
     protected float maxHealth;
+    [SerializeField]
     protected float speed =0.2f;
-    protected float damage;
+   // protected float damage;
     float currentHealth;
     [SerializeField]
     protected GameObject projectile;
@@ -50,8 +51,9 @@ public class BaseEntity : MonoBehaviour,IDamageable
     {
         CameraManager.instance.Shake(0.5f);
         VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
+        _rb.constraints = RigidbodyConstraints2D.None;
         _col.enabled = false;
-        CameraManager.instance.ripple.Emit(transform.position);
+     //   CameraManager.instance.ripple.Emit(transform.position);
         _rb.gravityScale = 1f;
         isDead = true;
         //play whatever anim needs to be played
