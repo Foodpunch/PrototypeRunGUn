@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class CameraManager : MonoBehaviour
     float shake;
     float slow;
     float slowDuration;
+
     /*  Camera Shake Implementation from GDC
      *  trauma -= Time.deltaTime; 
      *  shake = trauma^ or trauma^3
@@ -42,14 +44,14 @@ public class CameraManager : MonoBehaviour
     public void Shake(float _trauma,bool _isSustained = false)
     {
         trauma += _trauma;
-        slowDuration = 0.5f;
+        slowDuration = 0.1f;
         if (_isSustained) trauma = Mathf.Clamp(trauma, 0f, _trauma);
         offset++;
     }
     // Update is called once per frame
     void Update()
     {
-    
+        ShittyCameraFollow();
         if (trauma <=0f)
         {
             trauma = 0f;
@@ -63,6 +65,13 @@ public class CameraManager : MonoBehaviour
         }
         trauma = Mathf.Clamp(trauma, 0f, 1f);
         TimeSlow();
+    }
+
+    private void ShittyCameraFollow()
+    {
+        Vector3 camPos = PlayerScript.instance.transform.position;
+        camPos.z = transform.position.z; //z -10 can already.
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, camPos, 0.65f*Time.deltaTime);    //will refine later, not how you use lerps lol
     }
 
     void CameraShake()

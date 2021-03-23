@@ -77,11 +77,11 @@ public class BaseGun : MonoBehaviour
             shootDuration = gunTime + shootBuffer;
             isFiring = true;
         }
-        if (Input.GetMouseButton(1))
-        {
-            Time.timeScale = 0.1f;
-        }
-        else Time.timeScale = 1f;
+        //if (Input.GetMouseButton(1))
+        //{
+        //    Time.timeScale = 0.1f;
+        //}
+        //else Time.timeScale = 1f;
         if(isFiring)
         {
             gunTime += Time.deltaTime;
