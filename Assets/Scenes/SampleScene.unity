@@ -217,7 +217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &114580321
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1396,7 +1396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1123673651
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1680,7 +1680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!251 &1255870499
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -1808,7 +1808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1381112554
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2245,7 +2245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1668908040
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2373,7 +2373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1701151712
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2501,7 +2501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1778388572
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2621,6 +2621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1856466359}
   - component: {fileID: 1856466360}
+  - component: {fileID: 1856466361}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2655,6 +2656,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletDataList: {fileID: 0}
+--- !u!114 &1856466361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856466358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028c417585faa48e3b64d74598b94ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floors: 50
+  _platform: {fileID: 3066492384071270303, guid: 239915b6e69e740a295615aa25b5b65b,
+    type: 3}
 --- !u!1 &1957408462
 GameObject:
   m_ObjectHideFlags: 0
@@ -2673,7 +2689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1957408463
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2957,7 +2973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &2023383085
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3288,7 +3304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!251 &2116160281
 PlatformEffector2D:
   m_ObjectHideFlags: 0
