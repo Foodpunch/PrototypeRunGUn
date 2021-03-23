@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ShootingEnemy : BaseEntity
 {
-    float stopRadiusSqrd = 30f;
+    float stopRadiusSqrd = 10f;
 
     float shootTime;
     float nextTimeToFire;
@@ -61,7 +61,8 @@ public class ShootingEnemy : BaseEntity
 
     private void SpawnBullet()
     {
-        Quaternion rot = Quaternion.FromToRotation(transform.right, DirectionToPlayer);
+        Vector2 predictedPos = PlayerScript.instance.playerDirection * 2f;
+        Quaternion rot = Quaternion.FromToRotation(transform.right, DirectionToPlayer+(Vector3)predictedPos);
         GameObject bulletClone = Instantiate(projectile, transform.position,rot);
         bulletClone.GetComponent<IBullet>().SetValue(entityStats);
 

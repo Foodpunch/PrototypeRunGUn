@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     LayerMask defaultMask;
     float moveSpeed = 5f;
 
+    public Vector2 playerDirection;
     float jumpVelocity = 10f;
     Rigidbody2D _rb;
     BoxCollider2D _col;
@@ -54,6 +55,7 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
+        playerDirection = _rb.velocity.normalized;
         JumpLogic();
         MovementInput();
         SetGunDirectionToMouse();

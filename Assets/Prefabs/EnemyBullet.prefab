@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileStats:
     damage: 1
-    speed: 15
+    speed: 5
     timeToDisappear: 4
     gravityInfluence: 0
   bulletShell: {fileID: 3532259869840275594, guid: a877942cd7fbbdb4ca0f13db5663dd23,

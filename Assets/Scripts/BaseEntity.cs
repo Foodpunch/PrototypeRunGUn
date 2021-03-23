@@ -48,7 +48,7 @@ public class BaseEntity : MonoBehaviour,IDamageable
     }
     public virtual void OnDeath()
     {
-        CameraManager.instance.Shake(0.2f);
+        CameraManager.instance.Shake(0.5f);
         VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
         _col.enabled = false;
         CameraManager.instance.ripple.Emit(transform.position);
