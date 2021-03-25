@@ -11,15 +11,15 @@ public class BaseBullet : MonoBehaviour,IBullet
     float bulletSpeed;
     float timeToDisappear; //time in seconds that the bullet should be in the air for
 
-    bool bGravityInfluence = false;       //if the bullet can be influenced by gravity
+    protected bool bGravityInfluence = false;       //if the bullet can be influenced by gravity
 
-    bool valueSet;
+    protected bool valueSet;
 
     float bulletAirTime;            //time bullet has been in the air for
-    Rigidbody2D _rb;                //bullet's rigidbody
+    protected Rigidbody2D _rb;                //bullet's rigidbody
 
     public ProjectileStats projectileStats;
-    StatWrapper Stats;
+    protected StatWrapper Stats;
     public GameObject bulletShell;
     //particle fx for the bullet?
     //BulletStats _stats;
@@ -43,9 +43,9 @@ public class BaseBullet : MonoBehaviour,IBullet
             {
                 Despawn();
             }
-            if(!bGravityInfluence)
-            _rb.velocity = transform.right * Stats.speed;
-           // _rb.velocity = transform.right * bulletSpeed;
+            if(!bGravityInfluence) _rb.velocity = transform.right * Stats.speed;
+
+            // _rb.velocity = transform.right * bulletSpeed;
             //_rb.AddForce(transform.right * bulletSpeed*Time.deltaTime, ForceMode2D.Impulse);
             //_rb.MovePosition(transform.position + transform.right * bulletSpeed*Time.deltaTime);
         }

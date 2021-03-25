@@ -17,7 +17,7 @@ public class MeleeEntity : BaseEntity
 
     protected override void DoBehaviour()
     {
-        float f = Map(distSqrd, 0, speed, 0, stopRadiusSqrd);
+        float f = Map(distToPlayerSquared, 0, speed, 0, stopRadiusSqrd);
         _rb.velocity = new Vector2(DirectionToPlayer.x, DirectionToPlayer.y) * f;
 
         var hits = Physics2D.OverlapCircleAll(transform.position, separateRadius);

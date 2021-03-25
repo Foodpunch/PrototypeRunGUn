@@ -72,8 +72,7 @@ public class BaseGun : MonoBehaviour
     protected virtual void BufferedFiring()
     {
         if(Input.GetButton("Fire1"))
-        {
-        
+        {       
             shootDuration = gunTime + shootBuffer;
             isFiring = true;
         }

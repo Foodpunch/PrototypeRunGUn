@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
         //generate random platforms
         while(floors > 0)
         {
-            platformPerFloor = Random.Range(1, 4);
+            platformPerFloor = Random.Range(0, 3);
             switch(platformPerFloor)
             {
                 case 1:

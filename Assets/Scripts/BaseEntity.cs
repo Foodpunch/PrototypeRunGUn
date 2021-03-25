@@ -17,7 +17,7 @@ public class BaseEntity : MonoBehaviour,IDamageable
     [SerializeField]
     protected EntityStats entityStats;
 
-    protected float distSqrd;
+    protected float distToPlayerSquared;
     
 
     protected Vector3 targetPos;
@@ -63,7 +63,7 @@ public class BaseEntity : MonoBehaviour,IDamageable
     {
         targetPos = PlayerScript.instance.transform.position;       //tracking the player pos
         DirectionToPlayer = (targetPos - transform.position);
-        distSqrd = DirectionToPlayer.sqrMagnitude;   //sqr root is costly
+        distToPlayerSquared = DirectionToPlayer.sqrMagnitude;   //sqr root is costly
     }
     protected virtual void HurtBehaviour()     
     {

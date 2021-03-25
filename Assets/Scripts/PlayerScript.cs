@@ -209,7 +209,7 @@ public class PlayerScript : MonoBehaviour
          */
         if (IsGrounded()) return;
         float angle = Vector2.Angle(mouseDir, Vector2.down);
-        if (angle > 15f) return; 
+        if (angle > 18f) return; 
         if (force <= 0) force = 0;
         Vector3 forceDir = -mouseDir;
         forceDir.Normalize();
