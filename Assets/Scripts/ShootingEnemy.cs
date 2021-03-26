@@ -61,8 +61,8 @@ public class ShootingEnemy : BaseEntity
         if(Time.time >= nextTimeToFire + UnityEngine.Random.Range(0, maxTimeDelayOffset))
         {
             float randomTimeOffset = UnityEngine.Random.Range(0, maxTimeDelayOffset);
-            //SpawnBullet();
-            ShootGravityBullet();
+            SpawnBullet();
+            //ShootGravityBullet();
             nextTimeToFire = Time.time + (1f / entityStats.fireRate + randomTimeOffset);
         }
     }

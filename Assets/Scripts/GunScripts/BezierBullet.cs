@@ -28,10 +28,10 @@ public class BezierBullet : BaseBullet
             if(!set)
             {
                 midPoint = CalculateMidPointByAngle(45f) + startPos;
-
                 set = true;
             }
-            t += Time.deltaTime / Stats.speed;
+            float distance = (target - startPos).magnitude;
+            t += Time.deltaTime /(distance/Stats.speed);
         }
         if (t >= 1f) Despawn();
         transform.position = DoBezier(startPos, midPoint, target, t);
@@ -65,5 +65,18 @@ public class BezierBullet : BaseBullet
     {
         base.Despawn();
         VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
+        //probably might wanna do some addforce logic over here
+        //loop through all objects, get their pos, minus this pos to get dir
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, 2f);
+        foreach(Collider2D col in hitColliders)
+        {
+            Vector2 forceDirection = col.transform.position - this.transform.position+ Vector3.up;
+            forceDirection.Normalize();
+            if(col.GetComponent<Rigidbody2D>()!=null)
+            {
+                col.GetComponent<Rigidbody2D>().AddForce(forceDirection * 5f, ForceMode2D.Impulse);
+            }
+        }
+
     }
 }
