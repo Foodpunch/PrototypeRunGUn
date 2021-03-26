@@ -23,7 +23,7 @@ public class MeleeEntity : BaseEntity
         var hits = Physics2D.OverlapCircleAll(transform.position, separateRadius);
         foreach (var hit in hits)
         {
-            // make sure it is a fellow enemy ** use your enemy script name **
+            // make sure it is a fellow enemy
             if (hit.GetComponent<MeleeEntity>() != null && hit.transform != transform)
             {
                 // get the difference so you know which way to go
@@ -49,7 +49,6 @@ public class MeleeEntity : BaseEntity
             sum = sum.normalized * separateSpeed;
 
             // this is where you would apply this vector for movement
-            // i am basing this off of the code you provided
             transform.position = Vector2.MoveTowards(transform.position, transform.position + (Vector3)sum, separateSpeed * Time.deltaTime);
         }
     }
