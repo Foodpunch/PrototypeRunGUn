@@ -17,10 +17,13 @@ public class BaseBullet : MonoBehaviour,IBullet
 
     float bulletAirTime;            //time bullet has been in the air for
     protected Rigidbody2D _rb;                //bullet's rigidbody
+    protected SpriteRenderer _sr;
 
     public ProjectileStats projectileStats;
+    protected Vector2 target;
     protected StatWrapper Stats;
     public GameObject bulletShell;
+
     //particle fx for the bullet?
     //BulletStats _stats;
 
@@ -31,6 +34,7 @@ public class BaseBullet : MonoBehaviour,IBullet
     {
         _rb = this.GetComponent<Rigidbody2D>();
         timeToDisappear = projectileStats.timeToDisappear;
+        _sr = this.GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -60,6 +64,7 @@ public class BaseBullet : MonoBehaviour,IBullet
     public virtual void SetValue(EntityStats eStats)
     {
         Stats = new StatWrapper(projectileStats, eStats);
+        if (!eStats.isPlayerControlled) target = PlayerScript.instance.transform.position;
         valueSet = true;
     }
  

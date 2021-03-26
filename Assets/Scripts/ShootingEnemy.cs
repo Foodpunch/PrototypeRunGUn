@@ -71,7 +71,6 @@ public class ShootingEnemy : BaseEntity
         Vector2 predictedPos = PlayerScript.instance.playerDirection * UnityEngine.Random.Range(0, maxTimeDelayOffset);
         GameObject bulletClone = Instantiate(projectile, transform.position, Quaternion.identity);
         bulletClone.GetComponent<IBullet>().SetValue(entityStats);
-        bulletClone.GetComponent<BallisticBullet>().SetBallisticDestination(PlayerScript.instance.gameObject.transform.position);
     }
 
     private void SpawnBullet()
