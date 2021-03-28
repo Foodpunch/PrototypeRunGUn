@@ -27,14 +27,21 @@ public class BaseEntity : MonoBehaviour,IDamageable
     protected Collider2D _col;
     ContactPoint2D _contact;
     protected bool isDead = false;
-
-    
+    [SerializeField]
+    protected bool isHurt;                  //AI will not have i-frames. This is for checking when to flash the sprite.
+    [SerializeField]
+    protected Material[] hurtMaterial;      //0 black, 1 white
+    [SerializeField]
+    Material defaultMaterial;
+    float flashTime;
+    protected float hurtFlashDuration = .1f;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
+        
         _col = GetComponent<Collider2D>();
         GameManager.instance.onEnemyDeathEvent += OnDeath;
         currentHealth = maxHealth;
@@ -45,6 +52,7 @@ public class BaseEntity : MonoBehaviour,IDamageable
     {
         TrackPlayer();      //calculates direction and dist to player
         if (!isDead) DoBehaviour();
+        if (isHurt &&!isDead) DamageFlash();
         
     }
     public virtual void OnDeath()
@@ -74,13 +82,31 @@ public class BaseEntity : MonoBehaviour,IDamageable
     {
         //logic for AI to execute
     }
-
+    protected virtual void DamageFlash()
+    {
+        flashTime += Time.deltaTime/2f;
+        if (flashTime < hurtFlashDuration)
+        {
+            float x = flashTime * 10f;
+            _sr.material = hurtMaterial[Mathf.RoundToInt(x) % 2];
+        }
+        else
+        {
+            flashTime = 0f;
+            isHurt = false;
+            _sr.material = defaultMaterial;
+        }
+        //else
+        //isHurt = false;
+       // _sr.material = defaultMaterial;
+    }
 
     public void OnTakeDamage(StatWrapper Stats, ContactPoint2D contact)
     {
         _contact = contact;
         if (!isDead)
         {
+            isHurt = true;
             currentHealth -= Stats.damage;
             HurtBehaviour();
             if (currentHealth <= 0f)

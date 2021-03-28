@@ -156,3 +156,7 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  hurtMaterial:
+  - {fileID: 2100000, guid: fd65b1a555a01b341bbc921f6959e1e1, type: 2}
+  - {fileID: 2100000, guid: a8e3cbff6c7539f4e8a2c452f083876f, type: 2}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}

@@ -767,6 +767,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &669831108
 Rigidbody2D:
   serializedVersion: 4
@@ -923,6 +926,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &849703423
 Rigidbody2D:
   serializedVersion: 4
@@ -1079,6 +1085,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1014961694
 Rigidbody2D:
   serializedVersion: 4
@@ -1295,6 +1304,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1044376808
 Rigidbody2D:
   serializedVersion: 4
@@ -1451,6 +1463,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1045694486
 Rigidbody2D:
   serializedVersion: 4
@@ -1655,6 +1670,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1198619255
 Rigidbody2D:
   serializedVersion: 4
@@ -1811,6 +1829,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1254857607
 Rigidbody2D:
   serializedVersion: 4
@@ -1967,6 +1988,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1318787481
 Rigidbody2D:
   serializedVersion: 4
@@ -2276,6 +2300,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1710660693
 Rigidbody2D:
   serializedVersion: 4
@@ -2447,6 +2474,7 @@ MonoBehaviour:
   floors: 50
   _platform: {fileID: 3066492384071270303, guid: 239915b6e69e740a295615aa25b5b65b,
     type: 3}
+  _rooms: []
 --- !u!1 &1997971694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2610,9 @@ MonoBehaviour:
     spreadAngle: 0
     recoil: 0
     isPlayerControlled: 0
+  isHurt: 0
+  hurtMaterial: []
+  defaultMaterial: {fileID: 0}
 --- !u!50 &1997971699
 Rigidbody2D:
   serializedVersion: 4
