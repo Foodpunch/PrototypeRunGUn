@@ -19,7 +19,7 @@ public class ProjectileStats
 }
 
 [System.Serializable]
-public class EntityStats
+public class GunStat
 {
     public int maxAmmo;        
     public float fireRate;
@@ -31,32 +31,27 @@ public class EntityStats
     public bool isPlayerControlled;
 }
 
+[System.Serializable]
+public class EntityStat
+{
+    public int maxHealth;
+    public float speed;
+    public bool isPlayer;
+}
+
 public class StatWrapper
 {
     public ProjectileStats projectileData;
-    public EntityStats entityData;
+    public GunStat entityData;
 
     public float damage;
     public float speed;
-    public enum Entity
+    public StatWrapper(ProjectileStats _projectileStat, GunStat _gunStat)
     {
-        PLAYER,
-        ENEMY
-    };
-    public Entity entity;
-    public StatWrapper(ProjectileStats projectileStat, EntityStats entityStats)
-    {
-        projectileData = projectileStat;
-        entityData = entityStats;
-        damage = projectileStat.damage * entityStats.dmgMult;
-        speed = projectileStat.speed * entityStats.shotSpeedMult;
-        if(entityStats.isPlayerControlled)
-        {
-            entity = Entity.PLAYER;
-        }
-        else
-        {
-            entity = Entity.ENEMY;
-        }
+        projectileData = _projectileStat;
+        entityData = _gunStat;
+        damage = _projectileStat.damage * _gunStat.dmgMult;
+        speed = _projectileStat.speed * _gunStat.shotSpeedMult;
+
     }
 }

@@ -71,7 +71,7 @@ public class BezierBullet : BaseBullet
         foreach(Collider2D col in hitColliders)
         {
             Vector2 forceDirection = col.transform.position - this.transform.position+ Vector3.up;
-            forceDirection.Normalize();
+           // forceDirection.Normalize();
             if(col.GetComponent<Rigidbody2D>()!=null)
             {
                 col.GetComponent<Rigidbody2D>().AddForce(forceDirection * 5f, ForceMode2D.Impulse);

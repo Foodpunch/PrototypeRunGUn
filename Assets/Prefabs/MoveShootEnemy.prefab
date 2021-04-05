@@ -143,20 +143,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fc9a256d033474bb9810fcf3213775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  speed: 0.2
+  entityStat:
+    maxHealth: 10
+    speed: 0.2
+    isPlayer: 0
   projectile: {fileID: 309885325389170797, guid: ec0666b3c81c8774ab4e82a5d2e029d6,
     type: 3}
-  entityStats:
-    maxAmmo: 0
-    fireRate: 1
-    dmgMult: 1
-    shotSpeedMult: 1
-    pelletCount: 0
-    spreadAngle: 0
-    recoil: 0
-    isPlayerControlled: 0
+  isHurt: 0
   hurtMaterial:
   - {fileID: 2100000, guid: fd65b1a555a01b341bbc921f6959e1e1, type: 2}
   - {fileID: 2100000, guid: a8e3cbff6c7539f4e8a2c452f083876f, type: 2}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  enemyGunObject: {fileID: 0}

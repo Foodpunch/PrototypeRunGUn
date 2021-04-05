@@ -3,17 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingEnemy : BaseEntity
+public class ShootingEnemy : EnemyEntity
 {
   
     float entityRange = 900f;
     float maxTimeDelayOffset = 2f;
     float nextTimeToFire;
-    Vector3 spawnPos;           //position where AI spawned
+
     protected override void Start()
     {
         base.Start();
-        spawnPos = transform.position;
     }
     protected override void DoBehaviour()
     {
@@ -46,15 +45,7 @@ public class ShootingEnemy : BaseEntity
         //    }
         //}
     }
-    protected void ReturnToSpawnPoint()
-    {
-        float distToSpawnSquared = (transform.position - spawnPos).sqrMagnitude;
-        if (distToPlayerSquared > 10f)
-        {
-            _rb.velocity = (spawnPos - transform.position)*speed;
-        }
-   
-    }
+
 
     protected void ShootBehaviour()
     {
@@ -63,14 +54,14 @@ public class ShootingEnemy : BaseEntity
             float randomTimeOffset = UnityEngine.Random.Range(0, maxTimeDelayOffset);
             SpawnBullet();
             //ShootGravityBullet();
-            nextTimeToFire = Time.time + (1f / entityStats.fireRate + randomTimeOffset);
+            //nextTimeToFire = Time.time + (1f / gunStat.fireRate + randomTimeOffset);
         }
     }
     protected void ShootGravityBullet()
     {
         Vector2 predictedPos = PlayerScript.instance.playerDirection * UnityEngine.Random.Range(0, maxTimeDelayOffset);
         GameObject bulletClone = Instantiate(projectile, transform.position, Quaternion.identity);
-        bulletClone.GetComponent<IBullet>().SetValue(entityStats);
+        //bulletClone.GetComponent<IBullet>().SetValue(gunStat);
     }
 
     private void SpawnBullet()
@@ -80,7 +71,7 @@ public class ShootingEnemy : BaseEntity
         Vector2 predictedPos = PlayerScript.instance.playerDirection * UnityEngine.Random.Range(0, maxTimeDelayOffset);
         Quaternion rot = Quaternion.FromToRotation(transform.right, DirectionToPlayer+(Vector3)predictedPos);
         GameObject bulletClone = Instantiate(projectile, transform.position,rot);
-        bulletClone.GetComponent<IBullet>().SetValue(entityStats);
+        //bulletClone.GetComponent<IBullet>().SetValue(gunStat);
 
     }
 }

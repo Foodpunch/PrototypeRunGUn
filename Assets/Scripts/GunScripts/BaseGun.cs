@@ -15,8 +15,7 @@ public class BaseGun : MonoBehaviour
     protected float shootBuffer = 0.2f;     //buffered time for shooting
     float shootDuration;                    //=guntime + buffer time
     protected float gunTime;            //potentially anim curve related stuff
-
-    public EntityStats gunStat;
+    public GunStat gunStat;
     //change to take gun data scriptable obj in the future
     //BulletDataScrObj bulletData;
     //public GunStats gunStats;         //gun stats
@@ -30,7 +29,7 @@ public class BaseGun : MonoBehaviour
    
   //  protected Quaternion gunRotation;                             //rotation for gun direction
 
-    protected PlayerScript player;
+    protected PlayerEntity player;
 
 
     //public BaseGun(GunStats gunStats)
@@ -48,7 +47,7 @@ public class BaseGun : MonoBehaviour
     }
     protected virtual void Start()
     {
-        player = PlayerScript.instance.GetComponent<PlayerScript>();
+        player = PlayerEntity.instance.GetComponent<PlayerEntity>();
         //bullet = gunStats.bulletStats.bulletPrefab;
         currentAmmo = gunStat.maxAmmo;
        // SetGunStats(gunStats); 
@@ -57,13 +56,13 @@ public class BaseGun : MonoBehaviour
     {
         currentAmmo = gunStat.maxAmmo;
     }
-    public void SetGunStats(GunStats _gunStat)
-    {
-        fireRate = _gunStat.firerate;
-        gunDamageMult = _gunStat.damageMult;
-        gunShotSpeedMult = _gunStat.shotSpeedMult;
-        recoil = _gunStat.recoil;
-    }
+    //public void SetGunStats(GunStats _gunStat)
+    //{
+    //    fireRate = _gunStat.firerate;
+    //    gunDamageMult = _gunStat.damageMult;
+    //    gunShotSpeedMult = _gunStat.shotSpeedMult;
+    //    recoil = _gunStat.recoil;
+    //}
     // Update is called once per frame
     protected virtual void Update()
     {
@@ -76,11 +75,6 @@ public class BaseGun : MonoBehaviour
             shootDuration = gunTime + shootBuffer;
             isFiring = true;
         }
-        //if (Input.GetMouseButton(1))
-        //{
-        //    Time.timeScale = 0.1f;
-        //}
-        //else Time.timeScale = 1f;
         if(isFiring)
         {
             gunTime += Time.deltaTime;
@@ -111,7 +105,6 @@ public class BaseGun : MonoBehaviour
         GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.GetComponent<IBullet>().SetValue(gunStat);
         player.GunRecoilVert(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
-
     }
     protected virtual void SpawnShells()  //arbitrary implementation for the time being
     {

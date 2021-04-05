@@ -6,31 +6,21 @@ using System;
 public class BaseEntity : MonoBehaviour,IDamageable
 {
     [SerializeField]
-    protected float maxHealth;
-    [SerializeField]
-    protected float speed =0.2f;
-   // protected float damage;
-    float currentHealth;
+    protected EntityStat entityStat;
+    protected float currentHealth;
     [SerializeField]
     protected GameObject projectile;
 
-    [SerializeField]
-    protected EntityStats entityStats;
-
-    protected float distToPlayerSquared;
-    
-
-    protected Vector3 targetPos;
-    protected Vector3 DirectionToPlayer;
     protected Rigidbody2D _rb;
     protected SpriteRenderer _sr;
     protected Collider2D _col;
     ContactPoint2D _contact;
+    [SerializeField]
     protected bool isDead = false;
     [SerializeField]
     protected bool isHurt;                  //AI will not have i-frames. This is for checking when to flash the sprite.
     [SerializeField]
-    protected Material[] hurtMaterial;      //0 black, 1 white
+    protected Material[] hurtMaterial;      //0 black, 1 white could probably move this else where for nicer reference
     [SerializeField]
     Material defaultMaterial;
     float flashTime;
@@ -41,22 +31,21 @@ public class BaseEntity : MonoBehaviour,IDamageable
     {
         _rb = GetComponent<Rigidbody2D>();
         _sr = GetComponent<SpriteRenderer>();
-        
         _col = GetComponent<Collider2D>();
-        GameManager.instance.onEnemyDeathEvent += OnDeath;
-        currentHealth = maxHealth;
+        currentHealth = entityStat.maxHealth;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        TrackPlayer();      //calculates direction and dist to player
+      //  TrackPlayer();      //calculates direction and dist to player
         if (!isDead) DoBehaviour();
-        if (isHurt &&!isDead) DamageFlash();
-        
+        if (isHurt &&!isDead) DamageFlash();      //Move this to visuals update later
+
     }
     public virtual void OnDeath()
     {
+        _sr.material = defaultMaterial;
         CameraManager.instance.Shake(0.2f);
         VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
         _rb.constraints = RigidbodyConstraints2D.None;
@@ -67,16 +56,11 @@ public class BaseEntity : MonoBehaviour,IDamageable
         //play whatever anim needs to be played
 
     }
-    protected void TrackPlayer()
-    {
-        targetPos = PlayerScript.instance.transform.position;       //tracking the player pos
-        DirectionToPlayer = (targetPos - transform.position);
-        distToPlayerSquared = DirectionToPlayer.sqrMagnitude;   //sqr root is costly
-    }
+ 
     protected virtual void HurtBehaviour()     
     {
         //logic when AI gets hurt
-
+       //Should set a bool to flash renderer here.
     }
     protected virtual void DoBehaviour()
     {
@@ -117,26 +101,6 @@ public class BaseEntity : MonoBehaviour,IDamageable
     }
 
 
-    #region Map explanation
-    //how map works is that value will be "clamped" according to the speed and range.
-    //so in this case, if the distance is more than the range, f = max speed;
-    //if the distance is < 0, the speed will also be 0
-    //but if not, (meaning it's > 0 but < range) f = slower speed the smaller the range is.
-    #endregion
-    public float Map(float value, float from, float to, float from2, float to2)
-    {
-        if (value <= from2)
-        {
-            return from;
-        }
-        else if (value >= to2)
-        {
-            return to;
-        }
-        else
-        {
-            return (to - from) * ((value - from2) / (to2 - from2)) + from;
-        }
-    }
+   
   
 }

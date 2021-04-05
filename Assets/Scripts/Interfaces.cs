@@ -8,5 +8,5 @@ public interface IDamageable
 }
 public interface IBullet
 {
-    void SetValue(EntityStats entityStats);
+    void SetValue(GunStat entityStats);
 }

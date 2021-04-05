@@ -20,6 +20,8 @@ public class BaseMachineGun : BaseGun
         Vector2 bulletOffset = transform.up * Mathf.Sin(gunTime*gunStat.fireRate) * magnitude;      //fire rate = frequency of curve, magnitude = min/max value of curve
         GameObject bulletClone = Instantiate(bullet, transform.position+(Vector3)bulletOffset, transform.rotation);
         bulletClone.GetComponent<IBullet>().SetValue(gunStat);
-        //player.GunRecoilVert(gunStat.recoil-(player.hoverTime*gunStat.fireRate));
+        if (gunStat.isPlayerControlled)
+            player.GunRecoilVert(gunStat.recoil-(player.hoverTime*gunStat.fireRate/2));
+        //player.GunRecoilVert(gunStat.recoil);
     }
 }

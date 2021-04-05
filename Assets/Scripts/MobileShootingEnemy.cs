@@ -7,7 +7,7 @@ public class MobileShootingEnemy : ShootingEnemy
     float stopRadiusSqrd = 100f;
     protected override void DoBehaviour()   //arrive behavior
     {
-        float mappedSpeed = Map(distToPlayerSquared, 0, speed, 0, stopRadiusSqrd);
+        float mappedSpeed = Utilities.Map(distToPlayerSquared, 0, entityStat.speed, 0, stopRadiusSqrd);
         _rb.velocity = new Vector2(DirectionToPlayer.x, DirectionToPlayer.y) * mappedSpeed;
 
         if (mappedSpeed <= 0.1f)

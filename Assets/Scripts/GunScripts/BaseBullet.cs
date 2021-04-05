@@ -61,7 +61,7 @@ public class BaseBullet : MonoBehaviour,IBullet
     //    timeToDisappear = _data.TimeToDisappear;
     //    valueSet = true;
     //}
-    public virtual void SetValue(EntityStats eStats)
+    public virtual void SetValue(GunStat eStats)
     {
         Stats = new StatWrapper(projectileStats, eStats);
         if (!eStats.isPlayerControlled) target = PlayerScript.instance.transform.position;
