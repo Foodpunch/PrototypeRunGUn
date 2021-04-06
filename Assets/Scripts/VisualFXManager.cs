@@ -6,7 +6,7 @@ public class VisualFXManager : MonoBehaviour
 {
     public static VisualFXManager i;
     public List<Effects> effectsList;
-
+    
 
 
     // Start is called before the first frame update
@@ -32,6 +32,16 @@ public class VisualFXManager : MonoBehaviour
     {
         SpawnFX(GetEffectsByType(effectType), pos, Quaternion.identity);
     }
+    public void SpawnFXName(string name,ContactPoint2D contact)
+    {
+        Effects _fx = GetEffectByName(name);
+        //SpawnFX(_fx, contact);
+    }
+    public void SpawnFXName(string name,Vector3 pos)
+    {
+        Effects _fx = GetEffectByName(name);
+        SpawnFX(_fx, pos);
+    }
     //public void SpawnBulletFX(ContactPoint2D contact)
     //{
     //    SpawnFX(GetEffectsByType(Effects.EffectType.BULLET), contact);
@@ -56,6 +66,17 @@ public class VisualFXManager : MonoBehaviour
         }
         return listToReturn;
     }
+    Effects GetEffectByName(string name)
+    {
+        for(int i=0; i<effectsList.Count; i++)
+        {
+            if(Equals(name, effectsList[i].gameObject.name))
+            {
+                return effectsList[i];
+            }
+        }
+        throw new System.Exception("No such effect name");
+    }
     void SpawnFX(List<Effects> _list,ContactPoint2D contact)
     {
         for(int i=0; i<_list.Count; i++)
@@ -74,12 +95,16 @@ public class VisualFXManager : MonoBehaviour
             FXClone.transform.SetParent(gameObject.transform);
         }
     }
-
+    void SpawnFX(Effects fx, Vector3 pos)
+    {
+        Effects _fx = new Effects(fx,new ContactPoint2D());
+        GameObject FXClone = Instantiate(_fx.gameObject, pos, Quaternion.identity);
+        FXClone.transform.SetParent(gameObject.transform);
+    }
 }
 [System.Serializable]
 public class Effects            //effects class, effects data
 {
-    //public string name;
     public GameObject gameObject;
     Vector3 position;
     public Vector3 Position
@@ -102,7 +127,6 @@ public class Effects            //effects class, effects data
 
     public Effects(Effects e, ContactPoint2D contact)
     {
-       // name = e.name;
         gameObject = e.gameObject;
         position = contact.point;
         Rotation = Quaternion.FromToRotation(e.OriginDirection, contact.normal);

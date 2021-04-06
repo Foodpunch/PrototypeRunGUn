@@ -10,17 +10,10 @@ public class PlayerEntity : BaseEntity
     LayerMask defaultMask;
 
     float jumpVelocity = 10f;
-    [SerializeField]
     float jumpTimeBuffer = 0.25f;        //Buffer for jump time
-    [SerializeField]
     float groundTime;                    //times how long player has stayed on ground
-
     public float hoverTime;             //time for how long player has hovered 
-
-
-    [SerializeField]
     float jumpPressTime;
-    [SerializeField]
     float coyoteTime = 0.2f;            //coyote time buffer
 
     //Gun Mousemovement stuff
@@ -31,6 +24,13 @@ public class PlayerEntity : BaseEntity
     public static PlayerEntity instance;
 
     bool isDownJump;
+
+    //Jump and Landing FX stuff
+    bool hasJumpDustSpawned;
+    Vector2 feetPos;
+    [SerializeField]
+    GameObject landingDustFX;
+    float highestNegativeVelocity;      
     private void Awake()
     {
         instance = this;
@@ -39,6 +39,7 @@ public class PlayerEntity : BaseEntity
     {
         base.Start();
         defaultMask = gameObject.layer;
+        
     }
 
     protected override void Update()
@@ -47,7 +48,6 @@ public class PlayerEntity : BaseEntity
         JumpLogic();
         MovementInput();
         SetGunDirectionToMouse();
-
     }
     bool IsGrounded()   
      //uses boxcast to check if grounded 
@@ -99,8 +99,27 @@ public class PlayerEntity : BaseEntity
         if (!IsGrounded())
         {
             hoverTime += Time.deltaTime;
+            hasJumpDustSpawned = false;
+            if(_rb.velocity.y < highestNegativeVelocity)
+            {
+                highestNegativeVelocity = _rb.velocity.y;
+            }
         }
-        else hoverTime = 0;
+        else
+        {
+            hoverTime = 0;
+            if(!hasJumpDustSpawned) //some implementation for jump dust particle to scale with velocity
+            {
+                //lowest possible velocity is ~0.7f and highest goes all the way to -20++
+                float scale = Utilities.Map(highestNegativeVelocity, 2f, 0.75f, -16f, -1f);
+                GameObject fxClone = Instantiate(landingDustFX, GetFeetPos(), Quaternion.identity);
+                fxClone.transform.localScale *= scale;
+                fxClone.transform.SetParent(VisualFXManager.i.gameObject.transform);
+                hasJumpDustSpawned = true;
+            }
+            highestNegativeVelocity = 0f; //remember to reset
+        }
+
         if (isDownJump && hoverTime > 0f)
         {
             gameObject.layer = defaultMask.value;
@@ -120,6 +139,7 @@ public class PlayerEntity : BaseEntity
             if (groundTime > 0 && jumpPressTime < -(jumpTimeBuffer * 2))
             {
                 groundTime = 0;
+                VisualFXManager.i.SpawnFXName("JumpDustFX", GetFeetPos());
                 _rb.velocity = new Vector2(_rb.velocity.x, jumpVelocity);
             }
             jumpPressTime = jumpTimeBuffer;
@@ -127,6 +147,7 @@ public class PlayerEntity : BaseEntity
         if (jumpPressTime > 0 && IsGrounded())
         {
             jumpPressTime = 0;
+            VisualFXManager.i.SpawnFXName("JumpDustFX", GetFeetPos());
             _rb.velocity = new Vector2(_rb.velocity.x, jumpVelocity);
         }
         #region JumpLimit       
@@ -204,9 +225,17 @@ public class PlayerEntity : BaseEntity
         Vector3 forceDir = -mouseDir;
         forceDir.Normalize();
         if (forceDir.y > 0f)
+        {
             _rb.velocity = new Vector2(0, forceDir.y * force);
+            highestNegativeVelocity = 0f;   //gotta reset velocity if the player fires
+        }
+            
         //else _rb.velocity = _rb.velocity;
         //float y = Mathf.Clamp((forceDir.y * force), 0, jumpVelocity);
         //_rb.velocity = new Vector2(0, y);
+    }
+    Vector3 GetFeetPos()
+    {
+        return _col.bounds.center + ((Vector3)Vector2.down * 0.5f);
     }
 }

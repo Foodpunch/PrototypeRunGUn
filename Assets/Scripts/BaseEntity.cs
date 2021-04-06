@@ -8,8 +8,6 @@ public class BaseEntity : MonoBehaviour,IDamageable
     [SerializeField]
     protected EntityStat entityStat;
     protected float currentHealth;
-    [SerializeField]
-    protected GameObject projectile;
 
     protected Rigidbody2D _rb;
     protected SpriteRenderer _sr;
