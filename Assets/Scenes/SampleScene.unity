@@ -872,6 +872,10 @@ MonoBehaviour:
       type: 3}
     Type: 0
     OriginDirection: {x: 0, y: 0, z: 0}
+  - gameObject: {fileID: 2792459787758761511, guid: bbea3aa6d575dfc40b6a4d2a7b49b8ac,
+      type: 3}
+    Type: 0
+    OriginDirection: {x: 0, y: 0, z: 0}
 --- !u!4 &1028376128
 Transform:
   m_ObjectHideFlags: 0
@@ -1170,6 +1174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1593195884}
+  - component: {fileID: 1593195885}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -1185,12 +1190,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593195883}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.1236045, y: 5.757969, z: -2.7011719}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1593195885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593195883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028c417585faa48e3b64d74598b94ef5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floors: 50
+  levelObj: {fileID: 1593195883}
+  _platform: {fileID: 3066492384071270303, guid: 239915b6e69e740a295615aa25b5b65b,
+    type: 3}
+  _rooms:
+  - {fileID: 5442109485267531640, guid: a5b15ae1942b9412ea204bd888ebef36, type: 3}
+  - {fileID: 9015642198555348238, guid: 12d0ab80398694141b800afce7ba07b1, type: 3}
+  - {fileID: 3311458229390713938, guid: e93b9232cc14c44609e0e33603253540, type: 3}
 --- !u!1 &1856466358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1226,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1856466359}
   - component: {fileID: 1856466360}
-  - component: {fileID: 1856466361}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1236,26 +1260,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletDataList: {fileID: 0}
---- !u!114 &1856466361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856466358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028c417585faa48e3b64d74598b94ef5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floors: 50
-  levelObj: {fileID: 1593195883}
-  _platform: {fileID: 3066492384071270303, guid: 239915b6e69e740a295615aa25b5b65b,
-    type: 3}
-  _rooms:
-  - {fileID: 5442109485267531640, guid: a5b15ae1942b9412ea204bd888ebef36, type: 3}
-  - {fileID: 9015642198555348238, guid: 12d0ab80398694141b800afce7ba07b1, type: 3}
-  - {fileID: 3311458229390713938, guid: e93b9232cc14c44609e0e33603253540, type: 3}
 --- !u!1 &2066042071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,7 +1296,6 @@ MonoBehaviour:
     maxHealth: 10
     speed: 5
     isPlayer: 1
-  projectile: {fileID: 0}
   isDead: 0
   isHurt: 0
   hurtMaterial: []
@@ -1303,12 +1306,10 @@ MonoBehaviour:
   downJumpMask:
     serializedVersion: 2
     m_Bits: 4096
-  jumpTimeBuffer: 0.15
-  groundTime: 0
   hoverTime: 0
-  jumpPressTime: 0
-  coyoteTime: 0.2
   gun: {fileID: 451197620}
+  landingDustFX: {fileID: 4001072650285003984, guid: 9e26ff678d2e10d49a2ec2f1e996b141,
+    type: 3}
 --- !u!4 &2066042073
 Transform:
   m_ObjectHideFlags: 0
@@ -1529,7 +1530,6 @@ MonoBehaviour:
     maxHealth: 5
     speed: 0.2
     isPlayer: 0
-  projectile: {fileID: 0}
   isDead: 0
   isHurt: 0
   hurtMaterial:
