@@ -1161,6 +1161,36 @@ MonoBehaviour:
   dropInterval: 0.5
   shader: {fileID: 4800000, guid: 162fe242d486f4dab90ed53db15b9c19, type: 3}
   camera: {fileID: 0}
+--- !u!1 &1593195883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1593195884}
+  m_Layer: 0
+  m_Name: Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1593195884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593195883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.1236045, y: 5.757969, z: -2.7011719}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1856466358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1219,9 +1249,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floors: 50
+  levelObj: {fileID: 1593195883}
   _platform: {fileID: 3066492384071270303, guid: 239915b6e69e740a295615aa25b5b65b,
     type: 3}
-  _rooms: []
+  _rooms:
+  - {fileID: 5442109485267531640, guid: a5b15ae1942b9412ea204bd888ebef36, type: 3}
+  - {fileID: 9015642198555348238, guid: 12d0ab80398694141b800afce7ba07b1, type: 3}
+  - {fileID: 3311458229390713938, guid: e93b9232cc14c44609e0e33603253540, type: 3}
 --- !u!1 &2066042071
 GameObject:
   m_ObjectHideFlags: 0

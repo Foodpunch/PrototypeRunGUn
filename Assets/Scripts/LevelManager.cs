@@ -5,9 +5,11 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public float floors;
+    [SerializeField]
+    GameObject levelObj;
     public GameObject _platform;
     public GameObject[] _rooms;
-    int platformPerFloor;
+    int platformFloor;
 
     // Start is called before the first frame update
     void Start()
@@ -16,15 +18,17 @@ public class LevelManager : MonoBehaviour
         while(floors > 0)
         {
             //Lets try with 2 different types of level generation, room variant and random middle platform spawn with pre-determined side platforms
-
+            /*
             //pre-determined side platforms
             if (floors % 2 == 0)
             {
                 //left side platform
                 GameObject PlatformClone = Instantiate(_platform, new Vector2(Random.Range(-9f, -7f), (Random.Range(floors * 4 - 1, floors * 4)) - 2), transform.rotation);
+                PlatformClone.transform.SetParent(levelObj.transform);
                 if (Random.Range(0, 2) == 0)
                 {
                     PlatformClone = Instantiate(_platform, new Vector2(Random.Range(-2f, 2f), (Random.Range(floors * 4, floors * 4)) - 1), transform.rotation);
+                    PlatformClone.transform.SetParent(levelObj.transform);
                 }
             }
 
@@ -32,16 +36,19 @@ public class LevelManager : MonoBehaviour
             {
                 //right side platform
                 GameObject PlatformClone = Instantiate(_platform, new Vector2(Random.Range(7f, 9f), (Random.Range(floors * 4 - 1, floors * 4)) - 2), transform.rotation);
+                PlatformClone.transform.SetParent(levelObj.transform);
                 if (Random.Range(0, 2) == 0)
                 {
                     PlatformClone = Instantiate(_platform, new Vector2(Random.Range(-2f, 2f), (Random.Range(floors * 4, floors * 4)) - 1), transform.rotation);
+                    PlatformClone.transform.SetParent(levelObj.transform);
                 }
             }
-
+            */
             //Room variance
 
-
-            //platformPerFloor = Random.Range(0, 3);
+            platformFloor = Random.Range(0, _rooms.Length); //decide which floor preset to use
+            GameObject RoomClone = Instantiate(_rooms[platformFloor], new Vector2(0.5f, (floors * 5f + 0.5f)), transform.rotation);
+            RoomClone.transform.SetParent(levelObj.transform);
             //switch(platformPerFloor)
             //{
             //    case 1:
