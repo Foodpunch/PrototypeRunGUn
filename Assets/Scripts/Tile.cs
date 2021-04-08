@@ -55,7 +55,6 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
 
     public void RollTile()
     {
-        Debug.Log("isStatic =" + isStatic );
         if(!isStatic)
         {
             int rand = Random.Range(1, 100);

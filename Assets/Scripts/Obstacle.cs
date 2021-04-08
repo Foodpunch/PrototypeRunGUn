@@ -14,12 +14,11 @@ public class Obstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (obstacleSize == Vector2.zero) Debug.LogError("Size of obstacle not set in prefab!");
     }
-    public Vector2 Size
+    public Vector2 Size     //size should be readonly
     {
         get { return obstacleSize; }
-        //set { }
     }
     // Update is called once per frame
     void Update()
@@ -35,6 +34,7 @@ public class Obstacle : MonoBehaviour
             GetAllProbabilisticTiles();
             RollProbabilisticTiles();
         }
+        
     }
 
     [Button]
@@ -88,7 +88,7 @@ public class Obstacle : MonoBehaviour
         }
     }
     [Button]
-    public void GetObstacleSize()
+    public void GetObstacleSize()       //tool to help assign obstacle size
     {
         if(obstacleSize == Vector2.zero)
         {
@@ -100,4 +100,31 @@ public class Obstacle : MonoBehaviour
             obstacleSize += Vector2.one;    //increment by 1 to get the actual;
         }
     }
+
+    [Button]
+    public void MirrorObstacle()
+    {
+        //Check if can mirror first!
+        Vector2 flipVector = new Vector2(-1, 1);
+        Vector2 translationVector = new Vector2(-(Size.x - 1), 0);    //technically its min-max. 0-Size.x-1 = -Size.x-1
+        for(int i =0; i< tiles.Count; i++)
+        {
+            tiles[i].transform.localPosition += (Vector3)translationVector;     //translate first
+            tiles[i].transform.localPosition *= flipVector;                     //then flip
+        }
+        SetTileNames();
+    }
+    #region unused functions
+    //Vector2 GetSize()     //used to get size at runtime.
+    //{
+    //    Vector2 size = new Vector2();
+    //    for (int i = 0; i < tiles.Count; i++)
+    //    {
+    //        size.x = size.x < tiles[i].transform.localPosition.x ? tiles[i].transform.localPosition.x : size.x;
+    //        size.y = size.y < tiles[i].transform.localPosition.y ? tiles[i].transform.localPosition.y : size.y;
+    //    }
+    //    size += Vector2.one;    //increment by 1 to get the actual;
+    //    return size;
+    //}
+    #endregion
 }

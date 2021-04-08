@@ -41,3 +41,18 @@ public static class Utilities
         }
     }
 }
+
+public static class ExtendingVector2
+{
+    public static bool IsLesserThan(this Vector2 local, Vector2 other)
+    {
+        if(local.x <= other.x && local.y<= other.y)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}

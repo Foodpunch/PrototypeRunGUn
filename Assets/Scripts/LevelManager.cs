@@ -5,17 +5,25 @@ using NaughtyAttributes;
 
 public class LevelManager : MonoBehaviour
 {
-    public float floors;
-    [SerializeField]
-    GameObject levelObj;
-    public GameObject _platform;
-    public GameObject[] _rooms;
-    int platformFloor;
+    //public float floors;
+    //[SerializeField]
+    //GameObject levelObj;
+    //public GameObject _platform;
+    //public GameObject[] _rooms;
+    //int platformFloor;
+
+    public List<Obstacle> obstacleList;
+    public static LevelManager instance;
+
+    private void Awake()
+    {
+        instance = this;        
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        Init();
+        //Init();
         #region KimHao's Stuff
         //generate random platforms
         //while(floors > 0)
@@ -76,20 +84,38 @@ public class LevelManager : MonoBehaviour
         //}
         #endregion
     }
-    [Button]
-    private void Init()
-    {
-        for(int i =0; i<floors; i++)
-        {
-            platformFloor = Random.Range(0, _rooms.Length); //decide which floor preset to use
-            GameObject RoomClone = Instantiate(_rooms[platformFloor], new Vector2(0f, (i * 5f + 0.5f)), transform.rotation);
-            RoomClone.transform.SetParent(gameObject.transform);
-        }
-    }
 
+    #region oldstuff
+    //[Button]
+    //private void Init()
+    //{
+    //    for(int i =0; i<floors; i++)
+    //    {
+    //        platformFloor = Random.Range(0, _rooms.Length); //decide which floor preset to use
+    //        GameObject RoomClone = Instantiate(_rooms[platformFloor], new Vector2(0f, (i * 5f + 0.5f)), transform.rotation);
+    //        RoomClone.transform.SetParent(gameObject.transform);
+    //    }
+    //}
+    #endregion
     // Update is called once per frame
     void Update()
     {
         
     }
+
+    public Obstacle GetObstacle(Vector2 obstacleSize)       //might be slow? if you have to keep searching each time a room is generated.
+    {
+        List<Obstacle> _obs = new List<Obstacle>();
+        for(int i =0; i<obstacleList.Count; i++)
+        {
+            if(obstacleList[i].Size.IsLesserThan(obstacleSize))     //as long as obstacle fits in allocated size
+            {
+                _obs.Add(obstacleList[i]);
+            }
+        }
+        if (_obs == null) Debug.LogError("ERROR! No Obstacle of such size!");
+        int rand = Random.Range(0, _obs.Count);
+        return _obs[rand];
+    }
+
 }
