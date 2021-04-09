@@ -12,8 +12,9 @@ public class LevelManager : MonoBehaviour
     //public GameObject[] _rooms;
     //int platformFloor;
 
-    public List<Obstacle> obstacleList;
     public static LevelManager instance;
+
+    public List<Room> CurrentRoomList = new List<Room>();       //list of the rooms currently spawned in the level
 
     private void Awake()
     {
@@ -103,19 +104,5 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public Obstacle GetObstacle(Vector2 obstacleSize)       //might be slow? if you have to keep searching each time a room is generated.
-    {
-        List<Obstacle> _obs = new List<Obstacle>();
-        for(int i =0; i<obstacleList.Count; i++)
-        {
-            if(obstacleList[i].Size.IsLesserThan(obstacleSize))     //as long as obstacle fits in allocated size
-            {
-                _obs.Add(obstacleList[i]);
-            }
-        }
-        if (_obs == null) Debug.LogError("ERROR! No Obstacle of such size!");
-        int rand = Random.Range(0, _obs.Count);
-        return _obs[rand];
-    }
 
 }

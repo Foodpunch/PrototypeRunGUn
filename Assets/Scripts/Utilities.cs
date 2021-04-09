@@ -55,4 +55,27 @@ public static class ExtendingVector2
             return false;
         }
     }
+    public static bool IsLesserThan(this Vector2Int local, Vector2Int other)
+    {
+        if (local.x <= other.x && local.y <= other.y)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public static bool IsMoreThan(this Vector2Int local, Vector2Int other)
+    {
+        if (local.x >= other.x && local.y >= other.y)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
+

@@ -36,7 +36,6 @@ public class Obstacle : MonoBehaviour
         }
         
     }
-
     [Button]
     public void GetAllTilesInObstacle()
     {
@@ -73,7 +72,7 @@ public class Obstacle : MonoBehaviour
         }
     }
     [Button]
-    void RollProbabilisticTiles()
+    void RollProbabilisticTiles()       //need to make sure roll first before changing sprites!
     {
         if(ProbabilisticTileList==null)
         {
@@ -100,7 +99,7 @@ public class Obstacle : MonoBehaviour
             obstacleSize += Vector2.one;    //increment by 1 to get the actual;
         }
     }
-
+   
     [Button]
     public void MirrorObstacle()
     {
@@ -114,6 +113,7 @@ public class Obstacle : MonoBehaviour
         }
         SetTileNames();
     }
+   
     #region unused functions
     //Vector2 GetSize()     //used to get size at runtime.
     //{

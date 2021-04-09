@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+
 public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
 {
     public Vector2 tilePosition;
     public int blockChance;
     SpriteRenderer _sr;
     Collider2D _col;
-    public enum TileType
+    public enum TileType        //actually might not need this anymore. 
     {
         EMPTY,
         WALL,
@@ -19,6 +20,7 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
     public TileType tileType;
     int health;
     public bool isStatic; //probabilistic tile or static
+    //bool isDestructible = false;          //seems like a better implementation
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +41,7 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
     }
     void Init()
     {
-        switch(tileType)
+        switch(tileType)    //might not need this? Can just use a boolean for destructible, and bool for passthrough.
         {
             case TileType.WALL:
                 break;
