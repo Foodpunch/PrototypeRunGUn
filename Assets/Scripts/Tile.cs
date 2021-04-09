@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
-
 public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
 {
     public Vector2 tilePosition;
@@ -11,6 +10,7 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
     Collider2D _col;
     public enum TileType
     {
+        EMPTY,
         WALL,
         HAZARD,
         NEUTRAL,
@@ -19,7 +19,7 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
     public TileType tileType;
     int health;
     public bool isStatic; //probabilistic tile or static
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +49,8 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
                 break;
             case TileType.SPECIAL:
                 _col.usedByEffector = true; //arbritarily assigning this as true. Assuming these are the "special" tiles
+                break;
+            case TileType.EMPTY:
                 break;
         }
     }

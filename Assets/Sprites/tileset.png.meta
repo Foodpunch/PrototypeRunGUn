@@ -10,7 +10,7 @@ TextureImporter:
     second: wall_middletop
   - first:
       213: -7486092956772349302
-    second: wall_middleleft
+    second: wall_topleft
   - first:
       213: -3627264120405484348
     second: wall_columntop
@@ -34,7 +34,7 @@ TextureImporter:
     second: tileset_9
   - first:
       213: 9061651696941551919
-    second: tileset_10
+    second: wall_middleleft
   - first:
       213: -6985117363303071740
     second: wall_columnmiddle
@@ -333,7 +333,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: wall_middleleft
+      name: wall_topleft
       rect:
         serializedVersion: 2
         x: 50
@@ -501,7 +501,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset_10
+      name: wall_middleleft
       rect:
         serializedVersion: 2
         x: 50
