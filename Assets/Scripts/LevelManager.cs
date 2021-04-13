@@ -13,7 +13,9 @@ public class LevelManager : MonoBehaviour
     //int platformFloor;
 
     public static LevelManager instance;
-
+    public int maxRoomCount;
+    [SerializeField]
+    List<Room> Rooms;
     public List<Room> CurrentRoomList = new List<Room>();       //list of the rooms currently spawned in the level
 
     private void Awake()
@@ -24,7 +26,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Init();
+        Init();
         #region KimHao's Stuff
         //generate random platforms
         //while(floors > 0)
@@ -104,5 +106,43 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    //Pick random room from list (will later change to picking randomly from room type
+    Room  GetRandomRoom()
+    {
+        int i = Random.Range(0, Rooms.Count);
+        return Rooms[i];
+    }
+
+    void SetRoomPosAndSpawn(Room roomToSpawn)
+    {
+        if (CurrentRoomList.Count <= 0)
+        {
+            SpawnRoom(GetRandomRoom(),Vector2.zero);
+            return;
+        }
+            
+        //Get previous room Y pos and size, spawn on top of it.
+        Room previousRoom = CurrentRoomList[CurrentRoomList.Count - 1];
+        Vector2 previousRoomPos = previousRoom.gameObject.transform.position;
+        int offsetY = previousRoom.height;
+        Vector2 roomPos = previousRoomPos + (Vector2.up* offsetY);
+
+        //roomClone.transform.position = roomPos;
+        SpawnRoom(roomToSpawn,roomPos);
+    }
+    void SpawnRoom(Room roomToSpawn, Vector2 roomPos)
+    {
+        Room room = Instantiate(roomToSpawn, transform);
+        room.transform.localPosition = roomPos;
+        CurrentRoomList.Add(room);
+    }
+   void Init()
+    {
+        //spawn base number of rooms
+        for (int i = 0; i < 16; i++)
+        {
+            SetRoomPosAndSpawn(GetRandomRoom());
+        }
+    }
 
 }

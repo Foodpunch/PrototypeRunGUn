@@ -15,6 +15,7 @@ public class Obstacle : MonoBehaviour
     void Start()
     {
         if (obstacleSize == Vector2.zero) Debug.LogError("Size of obstacle not set in prefab!");
+        RollProbabilisticTiles();
     }
     public Vector2 Size     //size should be readonly
     {
@@ -34,7 +35,7 @@ public class Obstacle : MonoBehaviour
             GetAllProbabilisticTiles();
             RollProbabilisticTiles();
         }
-        
+   
     }
     [Button]
     public void GetAllTilesInObstacle()
@@ -72,19 +73,29 @@ public class Obstacle : MonoBehaviour
         }
     }
     [Button]
-    void RollProbabilisticTiles()       //need to make sure roll first before changing sprites!
+    public void RollProbabilisticTiles()       //need to make sure roll first before changing sprites!
     {
-        if(ProbabilisticTileList==null)
+        GetAllProbabilisticTiles();
+        for (int i = 0; i < ProbabilisticTileList.Count; i++)
         {
-            GetAllProbabilisticTiles();
+            int rand = Random.Range(0, 100);
+            if (rand < 50) MirrorObstacle();
+            ProbabilisticTileList[i].GetComponent<Tile>().RollTile();
         }
-        else
-        {
-            for (int i = 0; i < ProbabilisticTileList.Count; i++)
-            {
-                ProbabilisticTileList[i].GetComponent<Tile>().RollTile();
-            }
-        }
+        //if (ProbabilisticTileList==null)
+        //{
+        //    for (int i = 0; i < ProbabilisticTileList.Count; i++)
+        //    {
+        //        ProbabilisticTileList[i].GetComponent<Tile>().RollTile();
+        //    }
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < ProbabilisticTileList.Count; i++)
+        //    {
+        //        ProbabilisticTileList[i].GetComponent<Tile>().RollTile();
+        //    }
+        //}
     }
     [Button]
     public void GetObstacleSize()       //tool to help assign obstacle size

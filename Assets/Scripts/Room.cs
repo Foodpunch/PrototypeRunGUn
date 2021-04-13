@@ -21,12 +21,15 @@ public class Room : MonoBehaviour
     GameObject[,] RoomArray;       //2D array of tiles in the room. (do we really need this)
     [SerializeField]
     Tile wallTile;
-   
 
+    [SerializeField]
+    List<ObstacleTemplate> templateList;
 
     void Start()
     {
-        
+        ObstacleTemplate[] array = transform.GetComponentsInChildren<ObstacleTemplate>();
+        templateList = new List<ObstacleTemplate>(array);
+        SpawnObstacles();
     }
     
     // Update is called once per frame
@@ -90,6 +93,14 @@ public class Room : MonoBehaviour
         }
     }
 
+    public void SpawnObstacles()
+    {
+        foreach(ObstacleTemplate obt in templateList)
+        {
+            obt.TestObstacle();
+        }
+    }
+    #region unused code for room to spawn obstacles randomly
 
     //void SetObstacleTemplate()
     //{
@@ -132,4 +143,5 @@ public class Room : MonoBehaviour
     //        }
     //    }
     //}
+    #endregion
 }

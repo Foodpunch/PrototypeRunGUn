@@ -62,7 +62,6 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
         if(!isStatic)
         {
             int rand = Random.Range(1, 100);
-            Debug.Log(rand);
             gameObject.SetActive(rand <= blockChance);  //if player rolls within chance, block spawns.
         }
     }

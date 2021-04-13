@@ -38,7 +38,7 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = PlayerScript.instance.gameObject;
+        player = PlayerEntity.instance.gameObject;
         ripple = GetComponent<RippleEffect>();
     }
     public void Shake(float _trauma,bool _isSustained = false)
@@ -69,7 +69,7 @@ public class CameraManager : MonoBehaviour
 
     private void ShittyCameraFollow()
     {
-        Vector3 camPos = PlayerScript.instance.transform.position;
+        Vector3 camPos = PlayerEntity.instance.transform.position;
         camPos.z = transform.position.z; //z -10 can already.
         Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, camPos, 0.65f*Time.deltaTime);    //will refine later, not how you use lerps lol
     }

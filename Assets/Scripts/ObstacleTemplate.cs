@@ -6,19 +6,19 @@ using NaughtyAttributes;
 //[ExecuteInEditMode]
 public class ObstacleTemplate : MonoBehaviour
 {
-    [OnValueChanged("OnSizeChangeCallback")]
+    //Selects an area in the room and chooses an obstacle to be placed inside.
+
     [BoxGroup("Obstacle Size")]
     [MinValue(1)]
     public int sizeX = 1;
-    [OnValueChanged("OnSizeChangeCallback")]
     [BoxGroup("Obstacle Size")]
     [MinValue(1)]
     public int SizeY = 1;
 
+    [SerializeField]
+    Color gizmosColor;
 
     Vector2Int Size;
-    [SerializeField]
-    GameObject templateObj;
     GameObject[,] obstacleArea;
     [SerializeField]
     ObstacleList _obstaclesList;
@@ -32,51 +32,85 @@ public class ObstacleTemplate : MonoBehaviour
     {
         
     }
-    void OnSizeChangeCallback()
+
+    Vector2 GetObstaclePos(Obstacle _obs)
     {
-        Size = new Vector2Int(sizeX, SizeY);
-        if (obstacleArea != null) ClearPreviousTemplate();
-        if (Size.IsLesserThan(Vector2Int.zero)) return;
-        if(Size.IsMoreThan(Vector2Int.zero))
-        {
-            obstacleArea = new GameObject[(int)Size.x,(int)Size.y];
-            for (int x=0; x<obstacleArea.GetLength(0); x++)
-            {
-                for(int y=0; y< obstacleArea.GetLength(1);y++)
-                {
-                    Vector2 pos = new Vector2(x, y);
-                    GameObject objClone = Instantiate(templateObj, pos+(Vector2)transform.position, Quaternion.identity);
-                    objClone.transform.SetParent(transform);
-                    obstacleArea[x, y] = objClone;
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < gameObject.transform.childCount; i++)
-            {
-                DestroyImmediate(gameObject.transform.GetChild(i).gameObject);
-            }
-        }
+        int x = Mathf.FloorToInt( _obs.Size.x);         //do we even need to floor?
+        int y = Mathf.FloorToInt( _obs.Size.y);
+        int offsetX = Random.Range(0, Size.x - x+1);      //get the max allowed positions.
+        int offsetY = Random.Range(0, Size.y - y+1);
+
+        return new Vector2(offsetX, offsetY);
     }
-    void ClearPreviousTemplate()
-    {
-        for (int x = 0; x < obstacleArea.GetLength(0); x++)
-        {
-            for (int y = 0; y < obstacleArea.GetLength(1); y++)
-            {
-                DestroyImmediate(obstacleArea[x, y].gameObject);
-            }
-        }
-    }
+  
+
     [Button]
     public void TestObstacle()
     {
         Size = new Vector2Int(sizeX, SizeY);
-        Debug.Log(Size);
         Obstacle _obs = _obstaclesList.GetObstacle(Size);
-        Instantiate(_obs.gameObject, transform.position, Quaternion.identity);
+        GameObject obsClone = Instantiate(_obs.gameObject,transform);
+        obsClone.transform.localPosition = GetObstaclePos(_obs);
+        obsClone.GetComponent<Obstacle>().RollProbabilisticTiles();
         // Obstacle Obstacle = ObstacleList.Instance.GetObstacle(Size);
         // Instantiate(Obstacle.gameObject, transform.position, Quaternion.identity);
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = gizmosColor;
+        Size = new Vector2Int(sizeX, SizeY);
+        if (Size.IsLesserThan(Vector2Int.zero)) return;
+        else
+        {
+            for (int x = 0; x < Size.x; x++)
+            {
+                for (int y = 0; y < Size.y; y++)
+                {
+                    Vector2 pos = new Vector2(x, y);
+                    Gizmos.DrawCube(pos + (Vector2)transform.position, Vector2.one*0.95f);
+                }
+            }
+        }
+    }
+
+    #region unused function
+    //void OnSizeChangeCallback()
+    //{
+    //    Size = new Vector2Int(sizeX, SizeY);
+    //    if (obstacleArea != null) ClearPreviousTemplate();
+    //    if (Size.IsLesserThan(Vector2Int.zero)) return;
+    //    if (Size.IsMoreThan(Vector2Int.zero))
+    //    {
+    //        obstacleArea = new GameObject[(int)Size.x, (int)Size.y];
+    //        for (int x = 0; x < obstacleArea.GetLength(0); x++)
+    //        {
+    //            for (int y = 0; y < obstacleArea.GetLength(1); y++)
+    //            {
+    //                Vector2 pos = new Vector2(x, y);
+    //                GameObject objClone = Instantiate(templateObj, pos + (Vector2)transform.position, Quaternion.identity);
+    //                objClone.transform.SetParent(transform);
+    //                obstacleArea[x, y] = objClone;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        for (int i = 0; i < gameObject.transform.childCount; i++)
+    //        {
+    //            DestroyImmediate(gameObject.transform.GetChild(i).gameObject);
+    //        }
+    //    }
+    //}
+
+    //void ClearPreviousTemplate()
+    //{
+    //    for (int x = 0; x < obstacleArea.GetLength(0); x++)
+    //    {
+    //        for (int y = 0; y < obstacleArea.GetLength(1); y++)
+    //        {
+    //            DestroyImmediate(obstacleArea[x, y].gameObject);
+    //        }
+    //    }
+    //}
+    #endregion
 }
