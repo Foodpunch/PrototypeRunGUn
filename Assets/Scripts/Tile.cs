@@ -27,7 +27,7 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
     {
         _sr = GetComponent<SpriteRenderer>();
         _col = GetComponent<Collider2D>();
-        _col.usedByEffector = false;    //only enable if the block is somehow special
+        // _col.usedByEffector = false;    //only enable if the block is somehow special
     }
 
     // Update is called once per frame

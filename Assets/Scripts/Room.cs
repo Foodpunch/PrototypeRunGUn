@@ -41,7 +41,7 @@ public class Room : MonoBehaviour
     public void GenerateRoomWalls()
     {
         RoomArray = new GameObject[width, height];
-            ClearRoomArray();
+        ClearRoomArray();
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
@@ -61,6 +61,7 @@ public class Room : MonoBehaviour
                     GameObject wallClone = Instantiate(wallTile.gameObject, new Vector2(x+1, y)+(Vector2)transform.position, Quaternion.identity);
                     wallClone.transform.SetParent(transform);
                     RoomArray[x, y] = wallClone;
+                  
                 }
             }
         }

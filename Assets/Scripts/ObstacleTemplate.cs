@@ -52,6 +52,7 @@ public class ObstacleTemplate : MonoBehaviour
         GameObject obsClone = Instantiate(_obs.gameObject,transform);
         obsClone.transform.localPosition = GetObstaclePos(_obs);
         obsClone.GetComponent<Obstacle>().RollProbabilisticTiles();
+
         // Obstacle Obstacle = ObstacleList.Instance.GetObstacle(Size);
         // Instantiate(Obstacle.gameObject, transform.position, Quaternion.identity);
     }

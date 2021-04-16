@@ -16,7 +16,13 @@ public class LevelManager : MonoBehaviour
     public int maxRoomCount;
     [SerializeField]
     List<Room> Rooms;
-    public List<Room> CurrentRoomList = new List<Room>();       //list of the rooms currently spawned in the level
+  //  public List<Room> CurrentRoomList = new List<Room>();       //list of the rooms currently spawned in the level
+
+    public Queue<Room> CurrentRoomQueue = new Queue<Room>();      //queue of rooms
+    Room lastSpawnedRoom;
+
+    Vector2 playerPos;
+    float levelMaxY;                                    //max Y value of the current level
 
     private void Awake()
     {
@@ -103,7 +109,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        NextRoomSpawnLogic();
     }
 
     //Pick random room from list (will later change to picking randomly from room type
@@ -115,34 +121,47 @@ public class LevelManager : MonoBehaviour
 
     void SetRoomPosAndSpawn(Room roomToSpawn)
     {
-        if (CurrentRoomList.Count <= 0)
+        if (CurrentRoomQueue.Count <= 0)
         {
             SpawnRoom(GetRandomRoom(),Vector2.zero);
             return;
         }
             
         //Get previous room Y pos and size, spawn on top of it.
-        Room previousRoom = CurrentRoomList[CurrentRoomList.Count - 1];
-        Vector2 previousRoomPos = previousRoom.gameObject.transform.position;
-        int offsetY = previousRoom.height;
-        Vector2 roomPos = previousRoomPos + (Vector2.up* offsetY);
+        int offsetY = lastSpawnedRoom.height;
+        Vector2 roomPos = (Vector2)lastSpawnedRoom.transform.position + (Vector2.up* offsetY);
 
-        //roomClone.transform.position = roomPos;
         SpawnRoom(roomToSpawn,roomPos);
     }
     void SpawnRoom(Room roomToSpawn, Vector2 roomPos)
     {
         Room room = Instantiate(roomToSpawn, transform);
+        lastSpawnedRoom = room;
         room.transform.localPosition = roomPos;
-        CurrentRoomList.Add(room);
+        CurrentRoomQueue.Enqueue(room);
+        levelMaxY = roomPos.y + room.height;
+        
     }
    void Init()
     {
         //spawn base number of rooms
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 6; i++)
         {
             SetRoomPosAndSpawn(GetRandomRoom());
         }
     }
-
+    void NextRoomSpawnLogic()
+    {
+        //track player Y, compare to max Y, if value difference is more than amt, spawn next level
+        
+        playerPos = PlayerEntity.instance.transform.position;
+       // Debug.Log("Player pos + 9 = " + (playerPos.y + 9f) + " , Level Max " + levelMaxY + " = " + ((playerPos.y + 9f) >= levelMaxY));
+        if ((playerPos.y + 12f)>=levelMaxY)
+        {
+            SetRoomPosAndSpawn(GetRandomRoom());        //in the future level manager will determine what room
+            //pool the previous rooms here (might need to set a limit for when to dequeue
+            Room _room = CurrentRoomQueue.Dequeue();
+            _room.gameObject.SetActive(false);
+        }
+    }
 }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeX: 3
-  SizeY: 4
+  SizeY: 3
   gizmosColor: {r: 1, g: 0.33490568, b: 0.33490568, a: 0.49019608}
   _obstaclesList: {fileID: 11400000, guid: 10d0477773a698241b22886802bec3ba, type: 2}
 --- !u!1 &2608902333424929658
