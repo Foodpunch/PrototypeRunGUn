@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e7d38811aec4734ba67c2824f1aa398, type: 3}
   m_Name: ObstacleList
   m_EditorClassIdentifier: 
-  ObstaclesPrefabs:
+  ObstaclesPrefabsArray:
+  - {fileID: 3420872878167834168, guid: e7be8bc12338f1a419e506cfeb916852, type: 3}
   - {fileID: 1130475061086338522, guid: 07552058de826ab409b0de5fbdb560e4, type: 3}
   - {fileID: 7268712454653372466, guid: ac632d65798cbc94f899027a67c36e53, type: 3}
   - {fileID: 433931883734133565, guid: 0ad4b9e2217cd4b4980dcd2c7a83e642, type: 3}
   - {fileID: 3423672042927591859, guid: f70aa3afd39162346a254bbdefcde821, type: 3}
-  - {fileID: 3420872878167834168, guid: e7be8bc12338f1a419e506cfeb916852, type: 3}
   - {fileID: 2989185318252655941, guid: 99406354293f7e94cb0d37678008f516, type: 3}
+  - {fileID: 4561819626713158702, guid: b043ef951e4718441807e1bc83764bde, type: 3}
+  - {fileID: 845294480785042449, guid: d5741cdb7ca72fc46a261e2c4499c619, type: 3}

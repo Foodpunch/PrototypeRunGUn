@@ -10,6 +10,8 @@ public class Obstacle : MonoBehaviour
     [SerializeField]
     Vector2 obstacleSize;
     bool canMirror;         //bool to check if this obstacle can be mirrored
+    [HideInInspector]
+    public bool isMirrored;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +125,7 @@ public class Obstacle : MonoBehaviour
             tiles[i].transform.localPosition *= flipVector;                     //then flip
         }
         SetTileNames();
+        isMirrored = true;          //bool to check if mirrored and place correct sprites
     }
    
     #region unused functions
