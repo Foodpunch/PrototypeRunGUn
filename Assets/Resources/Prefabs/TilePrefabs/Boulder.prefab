@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePosition: {x: 0, y: 0}
   blockChance: 25
+  _sr: {fileID: 7455007902489008929}
   tileType: 1
   isStatic: 0
 --- !u!50 &7455007902489008934

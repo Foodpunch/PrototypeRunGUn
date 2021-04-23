@@ -1213,6 +1213,7 @@ MonoBehaviour:
   - {fileID: 3313065494480056183, guid: 0dd003a4a8ab0c446850a80c45670400, type: 3}
   - {fileID: 2608902335289796641, guid: 03a1c136cc2eaec48b73d2a69157e4bc, type: 3}
   - {fileID: 4106604108318618135, guid: 477bc138597f14e4fa3a61a1ab1267f2, type: 3}
+  levelSprites: {fileID: 11400000, guid: a192cff1346bc9d43a4560ca8e08b0e0, type: 2}
 --- !u!1 &1856466358
 GameObject:
   m_ObjectHideFlags: 0
