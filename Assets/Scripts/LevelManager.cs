@@ -23,6 +23,7 @@ public class LevelManager : MonoBehaviour
 
     Vector2 playerPos;
     float levelMaxY;                                    //max Y value of the current level
+    public GameSprites levelSprites;
 
     private void Awake()
     {

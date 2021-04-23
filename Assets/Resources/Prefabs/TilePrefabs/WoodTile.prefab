@@ -144,5 +144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePosition: {x: 0, y: 0}
   blockChance: 50
+  _sr: {fileID: 4544832719504562209}
   tileType: 4
   isStatic: 1

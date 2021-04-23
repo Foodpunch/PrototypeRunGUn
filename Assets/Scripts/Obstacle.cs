@@ -13,11 +13,16 @@ public class Obstacle : MonoBehaviour
     [HideInInspector]
     public bool isMirrored;
 
+    Tile[,] ObstacleSprites;
+
     // Start is called before the first frame update
     void Start()
     {
         if (obstacleSize == Vector2.zero) Debug.LogError("Size of obstacle not set in prefab!");
         RollProbabilisticTiles();
+        ObstacleSprites = new Tile[(int)obstacleSize.x, (int)obstacleSize.y];
+        Test();
+      //  Debug.Log("Name : " + transform.parent.transform.parent.name +"\n" + "World Pos : " + transform.position + "\n" + "IsTouchingWall? : " + IsTouchingWall());
     }
     public Vector2 Size     //size should be readonly
     {
@@ -59,7 +64,8 @@ public class Obstacle : MonoBehaviour
             for(int i =0; i< tiles.Count;i++)
             {
                 string name = tiles[i].isStatic ? "Static" : "Probabilistic";
-                tiles[i].gameObject.name = name + " , " + ((Vector2)tiles[i].transform.localPosition).ToString();
+                Vector2 tilePos = new Vector2(tiles[i].transform.position.x, tiles[i].transform.localPosition.y);
+                 tiles[i].gameObject.name = name + " , " + ((Vector2)tiles[i].transform.localPosition).ToString();
             }
         }
     }
@@ -128,6 +134,63 @@ public class Obstacle : MonoBehaviour
         isMirrored = true;          //bool to check if mirrored and place correct sprites
     }
    
+    public bool IsTouchingWall()
+    {
+        return transform.position.x == 0 || (transform.position.x + Size.x) == 7;
+    }
+    [Button]
+    public void Test()
+    {
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            //Debug.Log("Grid Pos = "+tiles[i].name + (int)(tiles[i].transform.position.x) + " , " + (int)(tiles[i].transform.localPosition.y - transform.localPosition.y));
+            //Debug.Log("Tile Pos = " + tiles[i].name + (int)(tiles[i].tilePosition.x) + " , " + (int)(tiles[i].tilePosition.y - transform.localPosition.y));
+            //Debug.Log(ObstacleSprites.GetLength(0) + " , " + ObstacleSprites.GetLength(1));
+            if(tiles[i].gameObject.activeInHierarchy)
+            {
+                ObstacleSprites[(int)(tiles[i].transform.localPosition.x), (int)(tiles[i].transform.localPosition.y)] = tiles[i];
+
+            }
+
+            //if (ObstacleSprites[(int)(tiles[i].transform.localPosition.x), (int)(tiles[i].transform.localPosition.y)].gameObject.activeInHierarchy)
+            //{
+            //  }
+        }
+        //Debug.Log("Name : " + transform.parent.transform.parent.name + "\n" + "World Pos : " + transform.position + "\n" + "IsTouchingWall? : " + IsTouchingWall());
+        bool isLeftWall = transform.position.x == 0;
+        bool isRightWall = (transform.position.x + Size.x) == 7;
+
+        for (int x = 0; x < ObstacleSprites.GetLength(0); x++)
+        {
+            for (int y = 0; y < ObstacleSprites.GetLength(1); y++)
+            {
+                if (ObstacleSprites[x, y] != null)
+                {
+                    //left most 
+                    if (isLeftWall)
+                    {
+                        if (ObstacleSprites[0, y] != null)
+                        {
+                            ObstacleSprites[x, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[53];
+                          //  ObstacleSprites[(int)obstacleSize.x-1, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[52];
+
+
+                        }
+
+                    }
+                    if (isRightWall)
+                    {
+                        if (ObstacleSprites[(int)obstacleSize.x - 1, y] != null)
+                        {
+                            ObstacleSprites[(int)obstacleSize.x - 1, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[53];
+                        }
+                    }
+                }
+            }
+        }
+    }
+ 
+    
     #region unused functions
     //Vector2 GetSize()     //used to get size at runtime.
     //{

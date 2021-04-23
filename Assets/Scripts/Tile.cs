@@ -7,7 +7,7 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
 {
     public Vector2 tilePosition;
     public int blockChance;
-    SpriteRenderer _sr;
+    public SpriteRenderer _sr;
     Collider2D _col;
     public enum TileType        //actually might not need this anymore. 
     {
