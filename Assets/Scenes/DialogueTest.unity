@@ -172,6 +172,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiTextMessage: {fileID: 1452910647}
+  dialogueText:
+  - Elijah is a feg
+  - Do you think so?
+  - Testing long sentences so this is just a lump of words to try to make a sentence.
+    Stop reading it
 --- !u!1 &503079257
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +542,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hi
+  m_Text: "\x03"
 --- !u!222 &1452910650
 CanvasRenderer:
   m_ObjectHideFlags: 0
