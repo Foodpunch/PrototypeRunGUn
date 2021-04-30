@@ -104,7 +104,8 @@ public class BaseGun : MonoBehaviour
     {
         GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation);
         bulletClone.GetComponent<IBullet>().SetValue(gunStat);
-        player.GunRecoilVert(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
+        //player.GunRecoilVert(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
+        //player.GunRecoil(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
     }
     protected virtual void SpawnShells()  //arbitrary implementation for the time being
     {
@@ -112,9 +113,9 @@ public class BaseGun : MonoBehaviour
         GameObject shellClone = Instantiate(shell, transform.position, transform.rotation);
         Vector3 shellDirection = Vector3.up - transform.right;
         shellClone.GetComponent<Rigidbody2D>().AddForce(shellDirection*4f, ForceMode2D.Impulse);
-        float dotProduct = Vector3.Dot(shootDirection, -shellDirection);
+        //float dotProduct = Vector3.Dot(shootDirection, -shellDirection);
         //positive value is anti clockwise direction, negative is clockwise
-        shellClone.GetComponent<Rigidbody2D>().AddTorque(Random.value*dotProduct,ForceMode2D.Impulse);
+        //shellClone.GetComponent<Rigidbody2D>().AddTorque(Random.value*dotProduct,ForceMode2D.Impulse);
     }
 
 

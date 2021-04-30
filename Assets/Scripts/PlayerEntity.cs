@@ -81,7 +81,11 @@ public class PlayerEntity : BaseEntity
             }
             else
             {
-                _rb.velocity = new Vector2(0, _rb.velocity.y);
+                _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y);
+              if(IsGrounded())
+                {
+                    _rb.velocity = new Vector2(0, _rb.velocity.y);
+                }
             }
         }
         if (Input.GetButton("Down"))         //crouching and stuff
@@ -208,7 +212,7 @@ public class PlayerEntity : BaseEntity
     {
         Vector3 forceDir = -mouseDir;
         forceDir.Normalize();
-        _rb.velocity += (Vector2)forceDir * force;
+        _rb.velocity = (Vector2)forceDir * force;
     }
 
     public void GunRecoilVert(float force)

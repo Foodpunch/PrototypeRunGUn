@@ -24,7 +24,8 @@ public class BaseShotgun : BaseGun
             GameObject bulletClone = Instantiate(bullet, transform.position, transform.rotation*randomArc);
             bulletClone.GetComponent<IBullet>().SetValue(gunStat);
             if(gunStat.isPlayerControlled)
-                player.GunRecoilVert(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
+                player.GunRecoil(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
+            //player.GunRecoilVert(gunStat.recoil - (player.hoverTime * gunStat.fireRate));
         }
       
     }

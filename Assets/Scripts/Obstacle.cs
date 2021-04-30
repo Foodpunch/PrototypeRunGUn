@@ -160,34 +160,34 @@ public class Obstacle : MonoBehaviour
         bool isLeftWall = transform.position.x == 0;
         bool isRightWall = (transform.position.x + Size.x) == 7;
 
-        for (int x = 0; x < ObstacleSprites.GetLength(0); x++)
-        {
-            for (int y = 0; y < ObstacleSprites.GetLength(1); y++)
-            {
-                if (ObstacleSprites[x, y] != null)
-                {
-                    //left most 
-                    if (isLeftWall)
-                    {
-                        if (ObstacleSprites[0, y] != null)
-                        {
-                            ObstacleSprites[x, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[53];
-                          //  ObstacleSprites[(int)obstacleSize.x-1, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[52];
+        //for (int x = 0; x < ObstacleSprites.GetLength(0); x++)
+        //{
+        //    for (int y = 0; y < ObstacleSprites.GetLength(1); y++)
+        //    {
+        //        if (ObstacleSprites[x, y] != null)
+        //        {
+        //            //left most 
+        //            if (isLeftWall)
+        //            {
+        //                if (ObstacleSprites[0, y] != null)
+        //                {
+        //                    ObstacleSprites[x, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[53];
+        //                  //  ObstacleSprites[(int)obstacleSize.x-1, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[52];
 
 
-                        }
+        //                }
 
-                    }
-                    if (isRightWall)
-                    {
-                        if (ObstacleSprites[(int)obstacleSize.x - 1, y] != null)
-                        {
-                            ObstacleSprites[(int)obstacleSize.x - 1, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[53];
-                        }
-                    }
-                }
-            }
-        }
+        //            }
+        //            if (isRightWall)
+        //            {
+        //                if (ObstacleSprites[(int)obstacleSize.x - 1, y] != null)
+        //                {
+        //                    ObstacleSprites[(int)obstacleSize.x - 1, y]._sr.sprite = LevelManager.instance.levelSprites.SpriteList[53];
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
  
     

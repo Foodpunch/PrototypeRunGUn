@@ -106,8 +106,8 @@ public class BaseBullet : MonoBehaviour,IBullet
     protected virtual void SpawnBulletEffects(ContactPoint2D contact)
     {
         VisualFXManager.i.SpawnFXType(Effects.EffectType.BULLET, contact);
-      //  GameManager.instance.BulletEffectsData.SpawnAllFX(contact);
-      //  bulletEffects.SpawnAllFX(contact);
+        //GameManager.instance.BulletEffectsData.SpawnAllFX(contact);
+        //bulletEffects.SpawnAllFX(contact);
     }
     protected virtual void SpawnNullifyEffect()
     {

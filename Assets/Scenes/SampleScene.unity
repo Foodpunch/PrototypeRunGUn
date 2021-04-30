@@ -402,14 +402,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451197620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 491f31c1c6b87dc49b8683a1c1059e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentAmmo: 0
   gunStat:
-    maxAmmo: 500
+    maxAmmo: 0
     fireRate: 12
     dmgMult: 0.8
     shotSpeedMult: 1
@@ -425,20 +425,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451197620}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24aeeccdffe9612438a235b1d97e27a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentAmmo: 0
   gunStat:
-    maxAmmo: 20
+    maxAmmo: 200
     fireRate: 1
     dmgMult: 1
     shotSpeedMult: 2
     pelletCount: 5
     spreadAngle: 15
-    recoil: 15
+    recoil: 25
     isPlayerControlled: 1
   bullet: {fileID: 4104534162083114540, guid: 3b63b9755354a524b9abdc49065450d5, type: 3}
 --- !u!114 &451197626
@@ -874,7 +874,7 @@ MonoBehaviour:
     OriginDirection: {x: 0, y: 0, z: 0}
   - gameObject: {fileID: 2792459787758761511, guid: bbea3aa6d575dfc40b6a4d2a7b49b8ac,
       type: 3}
-    Type: 0
+    Type: 3
     OriginDirection: {x: 0, y: 0, z: 0}
 --- !u!4 &1028376128
 Transform:
@@ -1296,7 +1296,9 @@ MonoBehaviour:
     isPlayer: 1
   isDead: 0
   isHurt: 0
-  hurtMaterial: []
+  hurtMaterial:
+  - {fileID: 2100000, guid: a8e3cbff6c7539f4e8a2c452f083876f, type: 2}
+  - {fileID: 2100000, guid: fd65b1a555a01b341bbc921f6959e1e1, type: 2}
   defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   platformMask:
     serializedVersion: 2
