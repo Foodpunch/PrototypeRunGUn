@@ -83,7 +83,6 @@ public class BaseGun : MonoBehaviour
                 //   CameraManager.instance.Shake(0.3f);
                 DeductAmmo();
                 SpawnBullet();
-                
                 SpawnShells();
                 nextTimeToFire = Time.time + (1f / gunStat.fireRate);
             }

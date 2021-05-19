@@ -16,6 +16,7 @@ public class BaseShotgun : BaseGun
 
     protected override void SpawnBullet()
     {
+        AudioManager.instance.PlaySound(AudioManager.SoundType.SHOTGUN_SHOOT,transform.position);
         // Debug.Log("BulletStats: " + gunStats.bulletStats.Debug());
         for (int i=0; i < gunStat.pelletCount; i++)
         {
