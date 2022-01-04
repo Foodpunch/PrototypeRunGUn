@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3532259869840275592}
   - component: {fileID: 3532259869840275595}
   - component: {fileID: 3532259869840275593}
-  - component: {fileID: 5399083929122956428}
   - component: {fileID: 8178708257398392988}
+  - component: {fileID: -3322812374033998574}
   m_Layer: 10
   m_Name: BulletShell
   m_TagString: Untagged
@@ -106,25 +106,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &5399083929122956428
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3532259869840275594}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 489d00be08522fb4a8c0b00a2950ab5d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!58 &8178708257398392988
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -141,3 +122,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &-3322812374033998574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3532259869840275594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54314b389d0b9b146a6139dc469e6e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToInActive: 4

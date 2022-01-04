@@ -31,7 +31,7 @@ public class BezierBullet : BaseBullet
                 set = true;
             }
             float distance = (target - startPos).magnitude;
-            t += Time.deltaTime /(distance/Stats.speed);
+            t += Time.deltaTime /(distance/gunStats.shotSpeed);
         }
         if (t >= 1f) Despawn();
         transform.position = DoBezier(startPos, midPoint, target, t);

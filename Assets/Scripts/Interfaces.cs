@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void OnTakeDamage(StatWrapper entityStats,ContactPoint2D _contact);
+    void OnTakeDamage(float damage,ContactPoint2D _contact);
 }
 public interface IBullet
 {

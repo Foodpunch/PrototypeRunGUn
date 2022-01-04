@@ -82,7 +82,7 @@ public class PlayerEntity : BaseEntity
             else
             {
                 _rb.velocity = new Vector2(_rb.velocity.x, _rb.velocity.y);
-              if(IsGrounded())
+              if(IsGrounded() && !BaseGun.isFiring)
                 {
                     _rb.velocity = new Vector2(0, _rb.velocity.y);
                 }

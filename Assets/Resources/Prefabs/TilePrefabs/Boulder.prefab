@@ -102,6 +102,7 @@ MonoBehaviour:
   _sr: {fileID: 7455007902489008929}
   tileType: 1
   isStatic: 0
+  isDestructible: 1
 --- !u!50 &7455007902489008934
 Rigidbody2D:
   serializedVersion: 4

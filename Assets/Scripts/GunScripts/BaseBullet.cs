@@ -7,12 +7,11 @@ public class BaseBullet : MonoBehaviour,IBullet
 {
     // public BulletDataScrObj bulletData;
 
-    float bulletDamage;
-    float bulletSpeed;
     float timeToDisappear; //time in seconds that the bullet should be in the air for
 
     protected bool bGravityInfluence = false;       //if the bullet can be influenced by gravity
 
+    protected GunStat gunStats;
     protected bool valueSet;
 
     float bulletAirTime;            //time bullet has been in the air for
@@ -21,7 +20,6 @@ public class BaseBullet : MonoBehaviour,IBullet
 
     public ProjectileStats projectileStats;
     protected Vector2 target;
-    protected StatWrapper Stats;
     public GameObject bulletShell;
 
     //particle fx for the bullet?
@@ -47,7 +45,7 @@ public class BaseBullet : MonoBehaviour,IBullet
             {
                 Despawn();
             }
-            if(!bGravityInfluence) _rb.velocity = transform.right * Stats.speed;
+            if(!bGravityInfluence) _rb.velocity = transform.right * gunStats.shotSpeed;
 
             // _rb.velocity = transform.right * bulletSpeed;
             //_rb.AddForce(transform.right * bulletSpeed*Time.deltaTime, ForceMode2D.Impulse);
@@ -63,8 +61,7 @@ public class BaseBullet : MonoBehaviour,IBullet
     //}
     public virtual void SetValue(GunStat eStats)
     {
-        Stats = new StatWrapper(projectileStats, eStats);
-        if (!eStats.isPlayerControlled) target = PlayerScript.instance.transform.position;
+
         valueSet = true;
     }
  
@@ -85,7 +82,7 @@ public class BaseBullet : MonoBehaviour,IBullet
                     SpawnNullifyEffect();
                 if(contact.collider.gameObject.GetComponent<IDamageable>()!=null)
                 {
-                    contact.collider.gameObject.GetComponent<IDamageable>().OnTakeDamage(Stats, contact);
+                    contact.collider.gameObject.GetComponent<IDamageable>().OnTakeDamage(gunStats.damage, contact);
                     SpawnBulletEffects(contact);
                 }
                 SpawnEnvirontmentEffect(contact);

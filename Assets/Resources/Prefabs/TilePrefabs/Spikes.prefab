@@ -226,5 +226,5 @@ MonoBehaviour:
   tilePosition: {x: 0, y: 0}
   blockChance: 33
   _sr: {fileID: 3712304190470217974}
-  tileType: 1
+  tileType: 2
   isStatic: 0

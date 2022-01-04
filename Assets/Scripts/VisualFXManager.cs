@@ -7,7 +7,7 @@ public class VisualFXManager : MonoBehaviour
     public static VisualFXManager i;
     public List<Effects> effectsList;
     
-
+    //Should try to follow the same method as audio manager
 
     // Start is called before the first frame update
     void Awake()

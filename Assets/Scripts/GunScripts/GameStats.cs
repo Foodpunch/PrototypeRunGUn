@@ -23,8 +23,8 @@ public class GunStat
 {
     public int maxAmmo;        
     public float fireRate;
-    public float dmgMult;
-    public float shotSpeedMult;
+    public float damage;
+    public float shotSpeed;
     public int pelletCount;
     public float spreadAngle;
     public float recoil;
@@ -39,19 +39,3 @@ public class EntityStat
     public bool isPlayer;
 }
 
-public class StatWrapper
-{
-    public ProjectileStats projectileData;
-    public GunStat entityData;
-
-    public float damage;
-    public float speed;
-    public StatWrapper(ProjectileStats _projectileStat, GunStat _gunStat)
-    {
-        projectileData = _projectileStat;
-        entityData = _gunStat;
-        damage = _projectileStat.damage * _gunStat.dmgMult;
-        speed = _projectileStat.speed * _gunStat.shotSpeedMult;
-
-    }
-}

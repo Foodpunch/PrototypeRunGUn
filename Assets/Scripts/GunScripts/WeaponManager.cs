@@ -4,10 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class WeaponManager : MonoBehaviour
 {
-    // Start is called before the first frame update
     public static WeaponManager instance;
-    //public BaseGun gun;
-   // public GunStats gun;
     BaseGun[] gunArray;
     public int currentGun = 0;
     [SerializeField] Text ammoUI;

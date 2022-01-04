@@ -18,9 +18,9 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
         SPECIAL
     }
     public TileType tileType;
-    int health;
+    int health=5;
     public bool isStatic; //probabilistic tile or static
-    //bool isDestructible = false;          //seems like a better implementation
+    public bool isDestructible = false;          //seems like a better implementation
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +35,20 @@ public class Tile : MonoBehaviour,IDamageable //For the tile prefab logic
     {
         
     }
-    public void OnTakeDamage(StatWrapper entityStats, ContactPoint2D _contact)
+    public void OnTakeDamage(float damage, ContactPoint2D _contact)
     {
+        if(isDestructible && health > 0)
+        {
+            health -= (int)damage;
+            if(health <=0)
+            {
+                CameraManager.instance.Shake(0.2f);
+                VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
+                CameraManager.instance.ripple.Emit(transform.position);
+                gameObject.SetActive(false);
+            }
+
+        }
             
     }
     void Init()

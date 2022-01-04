@@ -147,6 +147,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &395128657869018275
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +295,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &574270221014115738
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +443,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &2389573563996266212
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +591,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &2608902333383808109
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +757,9 @@ MonoBehaviour:
   height: 9
   wallTile: {fileID: 4783101700290877924, guid: ffadaaf8e637b3c4eadcac091d4f2445,
     type: 3}
-  templateList: []
+  templateList:
+  - {fileID: 2608902334762438602}
+  - {fileID: 2608902333383808111}
 --- !u!1 &2826579592790669505
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +907,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &3337678980565983901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1048,6 +1055,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &3699320852008682886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,6 +1203,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &3801142166012384169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,6 +1351,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &4443268852392695791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1489,6 +1499,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &4748783442030680906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,6 +1647,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &4981509885605798124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,6 +1795,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &5172644974814197891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,6 +1943,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &5883320037107292287
 GameObject:
   m_ObjectHideFlags: 0
@@ -2077,6 +2091,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &5910683594439116540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,6 +2239,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &6856122510012270679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,6 +2387,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &7333526558737109244
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,6 +2535,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &7461609004808652982
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,6 +2683,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1 &9210387025751862406
 GameObject:
   m_ObjectHideFlags: 0
@@ -2812,6 +2831,7 @@ MonoBehaviour:
   _sr: {fileID: 0}
   tileType: 0
   isStatic: 1
+  isDestructible: 0
 --- !u!1001 &2774100638227098384
 PrefabInstance:
   m_ObjectHideFlags: 0

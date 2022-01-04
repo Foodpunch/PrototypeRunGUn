@@ -145,6 +145,8 @@ public class LevelManager : MonoBehaviour
     }
    void Init()
     {
+        //First room
+        SpawnRoom(Rooms[2],Vector2.zero);
         //spawn base number of rooms
         for (int i = 0; i < 6; i++)
         {
@@ -162,7 +164,8 @@ public class LevelManager : MonoBehaviour
             SetRoomPosAndSpawn(GetRandomRoom());        //in the future level manager will determine what room
             //pool the previous rooms here (might need to set a limit for when to dequeue
             Room _room = CurrentRoomQueue.Dequeue();
-            _room.gameObject.SetActive(false);
+            //UNCOMMENT TO HIDE ROOMS HERE!! Currently showing all rooms for testing.
+            //_room.gameObject.SetActive(false);
         }
     }
 }

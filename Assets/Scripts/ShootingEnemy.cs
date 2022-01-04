@@ -68,8 +68,8 @@ public class ShootingEnemy : EnemyEntity
     {
         //AI tries to predict player's position randomly. In future, tweak to make it less accurate the higher the player velocity is.
         //and make it more accurate if the player is slow. (to encourage player movement)
-        Vector2 predictedPos = PlayerScript.instance.playerDirection * UnityEngine.Random.Range(0, maxTimeDelayOffset);
-        Quaternion rot = Quaternion.FromToRotation(transform.right, DirectionToPlayer+(Vector3)predictedPos);
+      //  Vector2 predictedPos = PlayerScript.instance.playerDirection * UnityEngine.Random.Range(0, maxTimeDelayOffset);
+      //  Quaternion rot = Quaternion.FromToRotation(transform.right, DirectionToPlayer+(Vector3)predictedPos);
       //  GameObject bulletClone = Instantiate(projectile, transform.position,rot);
         //bulletClone.GetComponent<IBullet>().SetValue(gunStat);
 

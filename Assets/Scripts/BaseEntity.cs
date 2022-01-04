@@ -38,7 +38,7 @@ public class BaseEntity : MonoBehaviour,IDamageable
     {
       //  TrackPlayer();      //calculates direction and dist to player
         if (!isDead) DoBehaviour();
-        if (isHurt &&!isDead) DamageFlash();      //Move this to visuals update later
+        //if (isHurt &&!isDead) DamageFlash();      //Move this to visuals update later
 
     }
     public virtual void OnDeath()
@@ -48,7 +48,7 @@ public class BaseEntity : MonoBehaviour,IDamageable
         VisualFXManager.i.SpawnFXType(Effects.EffectType.EXPLOSION, transform.position);
         _rb.constraints = RigidbodyConstraints2D.None;
         _col.enabled = false;
-     //   CameraManager.instance.ripple.Emit(transform.position);
+        CameraManager.instance.ripple.Emit(transform.position);
         _rb.gravityScale = 1f;
         isDead = true;
         //play whatever anim needs to be played
@@ -83,13 +83,13 @@ public class BaseEntity : MonoBehaviour,IDamageable
        // _sr.material = defaultMaterial;
     }
 
-    public void OnTakeDamage(StatWrapper Stats, ContactPoint2D contact)
+    public void OnTakeDamage(float damage, ContactPoint2D contact)
     {
         _contact = contact;
         if (!isDead)
         {
             isHurt = true;
-            currentHealth -= Stats.damage;
+            currentHealth -= damage;
             HurtBehaviour();
             if (currentHealth <= 0f)
             {

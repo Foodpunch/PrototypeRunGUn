@@ -10,16 +10,12 @@ public class BaseGun : MonoBehaviour
     protected float gunShotSpeedMult =1f;        //force at which bullet flies out at
     protected float recoil =10f;             //change to curve in the future?
 
-    public float currentAmmo;
+    public int currentAmmo;
 
     protected float shootBuffer = 0.2f;     //buffered time for shooting
     float shootDuration;                    //=guntime + buffer time
     protected float gunTime;            //potentially anim curve related stuff
     public GunStat gunStat;
-    //change to take gun data scriptable obj in the future
-    //BulletDataScrObj bulletData;
-    //public GunStats gunStats;         //gun stats
-    //protected BulletStats bulletStats;
     [SerializeField]
     protected GameObject bullet;       //Bullet that the gun uses    
 
@@ -27,19 +23,8 @@ public class BaseGun : MonoBehaviour
     float nextTimeToFire;           
     protected Vector3 shootDirection = Vector3.right;     //default shoot direction faces right
    
-  //  protected Quaternion gunRotation;                             //rotation for gun direction
-
     protected PlayerEntity player;
 
-
-    //public BaseGun(GunStats gunStats)
-    //{
-    //    fireRate = gunStats.firerate;
-    //    damage = gunStats.damage;
-    //    projectileSpeed = gunStats.projectileSpeed;
-    //    recoil = gunStats.recoil;
-    //}
-    //Vector3 lastShootPos = Vector3.zero;                       //last direction gun was facing
     // Start is called before the first frame update
     protected virtual void Awake()
     {
@@ -48,22 +33,12 @@ public class BaseGun : MonoBehaviour
     protected virtual void Start()
     {
         player = PlayerEntity.instance.GetComponent<PlayerEntity>();
-        //bullet = gunStats.bulletStats.bulletPrefab;
         currentAmmo = gunStat.maxAmmo;
-       // SetGunStats(gunStats); 
     }
     protected virtual void OnEnable()   //small hack for testing
     {
         currentAmmo = gunStat.maxAmmo;
     }
-    //public void SetGunStats(GunStats _gunStat)
-    //{
-    //    fireRate = _gunStat.firerate;
-    //    gunDamageMult = _gunStat.damageMult;
-    //    gunShotSpeedMult = _gunStat.shotSpeedMult;
-    //    recoil = _gunStat.recoil;
-    //}
-    // Update is called once per frame
     protected virtual void Update()
     {
        BufferedFiring();
@@ -97,7 +72,7 @@ public class BaseGun : MonoBehaviour
     protected virtual void DeductAmmo()
     {
         if (currentAmmo > 0) currentAmmo--;
-        else WeaponManager.instance.ChangeWeapon();
+        //else WeaponManager.instance.ChangeWeapon();
     }
     protected virtual void SpawnBullet()
     {
@@ -112,9 +87,9 @@ public class BaseGun : MonoBehaviour
         GameObject shellClone = Instantiate(shell, transform.position, transform.rotation);
         Vector3 shellDirection = Vector3.up - transform.right;
         shellClone.GetComponent<Rigidbody2D>().AddForce(shellDirection*4f, ForceMode2D.Impulse);
-        //float dotProduct = Vector3.Dot(shootDirection, -shellDirection);
+        float dotProduct = Vector3.Dot(shootDirection, -shellDirection);
         //positive value is anti clockwise direction, negative is clockwise
-        //shellClone.GetComponent<Rigidbody2D>().AddTorque(Random.value*dotProduct,ForceMode2D.Impulse);
+        shellClone.GetComponent<Rigidbody2D>().AddTorque(Random.value*dotProduct,ForceMode2D.Impulse);
     }
 
 

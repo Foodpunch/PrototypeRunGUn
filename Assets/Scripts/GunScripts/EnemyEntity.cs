@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyEntity : BaseEntity
 {
     //The most basic implementation of an enemy. 
-    //Stationary, fires at player.
+    //HP system, touch dmg to player, immobile.
     protected float distToPlayerSquared;
     protected Vector3 targetPos;
     protected Vector3 DirectionToPlayer;
